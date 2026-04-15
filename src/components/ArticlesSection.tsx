@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import { articles as allArticles } from '@/lib/articles'
 
-const articles = [
+const featuredArticles = [
     { num: '001', category: 'Culture & Society', title: 'Floodplain vs Fractured-Sea Cultures: Why Geography Is Destiny', excerpt: 'Why do whole civilisations think so differently? The answer may lie not in religion or economics — but in the shape of the land itself.', featured: true, slug: 'floodplain-vs-fractured-sea' },
     { num: '009', category: 'Spirituality', title: 'Gnosticism and the Demiurge: The Hidden Creation Story', slug: 'gnosticism-and-the-demiurge' },
     { num: '015', category: 'Original Theory', title: 'Yin-Yang as a Fractal Map of the World', slug: 'yin-yang-fractal-map' },
     { num: '020', category: 'History & Myth', title: 'Queen Himiko and the Mystery of Yamatai', slug: 'queen-himiko-yamatai' },
-    { num: '025', category: 'Science & Mind', title: 'The Simulation Hypothesis: How Seriously Should We Take It?', slug: 'simulation-hypothesis' },
+    { num: '026', category: 'Japan & Culture', title: 'The Harmony Paradox', slug: 'harmony-paradox' },
 ]
 
 const AtlasCorner = ({ flip }: { flip?: boolean }) => (
@@ -23,8 +24,8 @@ const AtlasCorner = ({ flip }: { flip?: boolean }) => (
 )
 
 export default function ArticlesSection() {
-    const featured = articles.find(a => a.featured)
-    const rest = articles.filter(a => !a.featured)
+    const featured = featuredArticles.find(a => a.featured)
+    const rest = featuredArticles.filter(a => !a.featured)
 
     return (
         <section id="articles" style={{ position: 'relative', background: 'var(--washi)' }}>
@@ -59,7 +60,7 @@ export default function ArticlesSection() {
                         fontFamily: "'DM Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.2em',
                         textTransform: 'uppercase', color: 'var(--sepia)', borderBottom: '1px solid var(--faint)', paddingBottom: '0.2rem',
                     }}>
-                        All 25 Articles →
+                        All {allArticles.length} Articles →
                     </Link>
                 </div>
 

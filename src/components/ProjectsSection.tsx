@@ -2,7 +2,10 @@ import Link from 'next/link'
 
 const projects = [
     { kanji: '漢', tag: 'Language · Japan', title: 'Joyo Kanji Explorer', desc: 'All 2,136 joyo kanji — meanings, readings, stroke order, and the hidden connections between characters.', status: 'live', href: 'https://kanji.hiddenmaps.app', external: true },
-    { kanji: '幕', tag: 'History · Japan', title: 'Bakumatsu Japan', desc: "An interactive map and guide to Japan's most turbulent era — the twilight of the samurai.", status: 'dev', href: '/bakumatsu', external: false },
+    {
+        kanji: '幕', tag: 'History · Japan', title: 'Bakumatsu Japan',
+        desc: "1853–1869. Perry's black ships arrive. The samurai world fractures. Watch Japan's most turbulent era unfold domain by domain.", status: 'live', href: 'https://bakumatsu.hiddenmaps.app', external: true
+    },
     { kanji: '地', tag: 'History · AI · Maps', title: 'Historical Earth', desc: 'An AI-powered globe. Select any place, any era — and watch the world as it once was brought to life.', status: 'soon', href: '/historical-earth', external: false },
 ]
 

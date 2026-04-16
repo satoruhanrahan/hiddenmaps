@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
 const projects = [
-    { kanji: '漢', tag: 'Language · Japan', title: 'Joyo Kanji Explorer', desc: 'All 2,136 joyo kanji — meanings, readings, stroke order, and the hidden connections between characters.', status: 'live', href: '/kanji' },
-    { kanji: '幕', tag: 'History · Japan', title: 'Bakumatsu Japan', desc: "An interactive map and guide to Japan's most turbulent era — the twilight of the samurai.", status: 'dev', href: '/bakumatsu' },
-    { kanji: '地', tag: 'History · AI · Maps', title: 'Historical Earth', desc: 'An AI-powered globe. Select any place, any era — and watch the world as it once was brought to life.', status: 'soon', href: '/historical-earth' },
+    { kanji: '漢', tag: 'Language · Japan', title: 'Joyo Kanji Explorer', desc: 'All 2,136 joyo kanji — meanings, readings, stroke order, and the hidden connections between characters.', status: 'live', href: 'https://kanji.hiddenmaps.app', external: true },
+    { kanji: '幕', tag: 'History · Japan', title: 'Bakumatsu Japan', desc: "An interactive map and guide to Japan's most turbulent era — the twilight of the samurai.", status: 'dev', href: '/bakumatsu', external: false },
+    { kanji: '地', tag: 'History · AI · Maps', title: 'Historical Earth', desc: 'An AI-powered globe. Select any place, any era — and watch the world as it once was brought to life.', status: 'soon', href: '/historical-earth', external: false },
 ]
 
 const statusLabel: Record<string, string> = { live: 'Live', dev: 'In Development', soon: 'Coming Soon' }
@@ -44,14 +44,17 @@ export default function ProjectsSection() {
 
                 <div className="reveal reveal-delay-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                     {projects.map(p => (
-                        <Link key={p.title} href={p.href} style={{
-                            padding: '2.5rem',
-                            border: '1px solid rgba(201,146,42,0.1)',
-                            background: 'rgba(255,255,255,0.02)',
-                            display: 'block',
-                            transition: 'background 0.3s, border-color 0.3s',
-                            position: 'relative',
-                        }}>
+                        <Link key={p.title} href={p.href}
+                            target={p.external ? '_blank' : undefined}
+                            rel={p.external ? 'noopener noreferrer' : undefined}
+                            style={{
+                                padding: '2.5rem',
+                                border: '1px solid rgba(201,146,42,0.1)',
+                                background: 'rgba(255,255,255,0.02)',
+                                display: 'block',
+                                transition: 'background 0.3s, border-color 0.3s',
+                                position: 'relative',
+                            }}>
                             <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.8rem', fontWeight: 300, color: 'rgba(201,146,42,0.3)', display: 'block', lineHeight: 1, marginBottom: '1.5rem' }}>
                                 {p.kanji}
                             </span>

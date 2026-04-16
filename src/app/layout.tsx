@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     url: 'https://hiddenmaps.app',
     siteName: 'Hidden Maps',
   },
+  icons: { icon: '/icon.svg' }
 }
 
 export default function RootLayout({

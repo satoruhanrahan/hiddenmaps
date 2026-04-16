@@ -113,7 +113,7 @@ export default async function ArticlePage({ params }: Props) {
                     </p>
                 </div>
 
-                {/* Atlas specimen card */}
+                {/* Atlas record card */}
                 <div style={{
                     border: '1px solid rgba(139,115,85,0.25)',
                     borderTop: '3px solid var(--deep-sepia)',
@@ -127,7 +127,7 @@ export default async function ArticlePage({ params }: Props) {
                         letterSpacing: '0.25em', textTransform: 'uppercase',
                         color: 'var(--parchment)', background: 'var(--deep-sepia)',
                         padding: '0.2rem 0.7rem',
-                    }}>Specimen</div>
+                    }}>Record</div>
 
                     {[
                         { label: 'Category', value: article.categoryLabel },

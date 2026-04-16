@@ -83,7 +83,7 @@ export default function ArticlesSection() {
                             position: 'relative',
                         }}>
                             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.6rem' }}>
-                                Specimen No. {featured.num}
+                                Record No. {featured.num}
                             </div>
                             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.9rem' }}>
                                 {featured.category}
@@ -108,7 +108,7 @@ export default function ArticlesSection() {
                             borderBottom: i < 2 ? '1px solid rgba(139,115,85,0.2)' : undefined,
                         }}>
                             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.6rem' }}>
-                                Specimen No. {article.num}
+                                Record No. {article.num}
                             </div>
                             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.9rem' }}>
                                 {article.category}

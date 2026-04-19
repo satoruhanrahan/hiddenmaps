@@ -181,7 +181,7 @@ export default function ArticlesPage() {
     )
 }
 
-function ArticleRow({ article }: { article: { num: string; title: string; blurb: string; slug: string } }) {
+function ArticleRow({ article }: { article: { num: string; title: string; blurb: string; slug: string; image?: string } }) {
     const [hovered, setHovered] = useState(false)
 
     return (
@@ -191,8 +191,8 @@ function ArticleRow({ article }: { article: { num: string; title: string; blurb:
             onMouseLeave={() => setHovered(false)}
             style={{
                 display: 'grid',
-                gridTemplateColumns: '3rem 1fr auto',
-                alignItems: 'start',
+                gridTemplateColumns: article.image ? '3rem 80px 1fr auto' : '3rem 1fr auto',
+                alignItems: 'center',
                 gap: '1.5rem',
                 padding: '1.8rem 0',
                 borderBottom: '1px solid rgba(139,115,85,0.1)',
@@ -209,9 +209,33 @@ function ArticleRow({ article }: { article: { num: string; title: string; blurb:
                 pointerEvents: 'none',
             }} />
 
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.1em', color: 'var(--faint)', paddingTop: '0.3rem', position: 'relative', zIndex: 1 }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.1em', color: 'var(--faint)', position: 'relative', zIndex: 1 }}>
                 {article.num}
             </span>
+
+            {/* Thumbnail */}
+            {article.image && (
+                <div style={{
+                    position: 'relative', zIndex: 1,
+                    width: 80, height: 54,
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                    border: '1px solid rgba(139,115,85,0.2)',
+                }}>
+                    <img
+                        src={article.image}
+                        alt={article.title}
+                        style={{
+                            width: '100%', height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block',
+                            transition: 'transform 0.3s',
+                            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+                        }}
+                    />
+                </div>
+            )}
 
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <h2 style={{

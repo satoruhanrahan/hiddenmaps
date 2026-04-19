@@ -58,11 +58,41 @@ export default async function ArticlePage({ params }: Props) {
 
             <NavLight />
 
+            {/* Hero banner image */}
+            {article.image && (
+                <div style={{
+                    position: 'relative', zIndex: 1,
+                    width: '100%',
+                    height: '420px',
+                    overflow: 'hidden',
+                    marginTop: '52px',
+                }}>
+                    <img
+                        src={article.image}
+                        alt={article.title}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block',
+                        }}
+                    />
+                    {/* Gradient fade at bottom into parchment */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: 0, left: 0, right: 0,
+                        height: '160px',
+                        background: 'linear-gradient(to bottom, transparent, var(--parchment))',
+                    }} />
+                </div>
+            )}
+
             {/* Article Header */}
             <header style={{
                 position: 'relative', zIndex: 1,
                 maxWidth: 1100, margin: '0 auto',
-                padding: '8rem 3rem 4rem',
+                padding: article.image ? '2rem 3rem 4rem' : '8rem 3rem 4rem',
                 display: 'grid',
                 gridTemplateColumns: '1fr 320px',
                 gap: '5rem',

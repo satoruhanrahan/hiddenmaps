@@ -20,10 +20,10 @@ const projects = [
     },
     {
         kanji: '地', tag: 'History · AI · Maps', tagJa: '歴史・AI・地図',
-        title: 'Historical Earth', titleJa: 'ヒストリカル・アース',
+        title: 'TimeGlobe', titleJa: 'タイムグローブ',
         desc: 'An AI-powered globe. Select any place, any era — and watch the world as it once was brought to life.',
         descJa: 'AIを使った地球儀。任意の場所、任意の時代を選ぶと——かつての世界が生き生きと蘇る。',
-        status: 'soon', href: '/historical-earth', external: false,
+        status: 'dev', href: 'https://timeglobe.hiddenmaps.app', external: true,
     },
 ]
 

@@ -2,9 +2,12 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import LanguageToggle from './LanguageToggle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Nav() {
     const [scrolled, setScrolled] = useState(false)
+    const { t } = useLanguage()
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 80)
@@ -37,29 +40,32 @@ export default function Nav() {
                 Hidden Maps
             </Link>
 
-            <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none' }}>
-                {[
-                    { label: 'Articles', href: '/#articles' },
-                    { label: 'Projects', href: '/#projects' },
-                    { label: 'About', href: '/#about' },
-                ].map(({ label, href }) => (
-                    <li key={label}>
-                        <Link href={href} style={{
-                            fontFamily: "'DM Mono', monospace",
-                            fontSize: '0.65rem',
-                            letterSpacing: '0.18em',
-                            textTransform: 'uppercase',
-                            color: 'rgba(244,240,230,0.5)',
-                            transition: 'color 0.2s',
-                        }}
-                            onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold-light)')}
-                            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,240,230,0.5)')}
-                        >
-                            {label}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
+                <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none' }}>
+                    {[
+                        { label: t.nav.articles, href: '/#articles' },
+                        { label: t.nav.projects, href: '/#projects' },
+                        { label: t.nav.about, href: '/#about' },
+                    ].map(({ label, href }) => (
+                        <li key={label}>
+                            <Link href={href} style={{
+                                fontFamily: "'DM Mono', monospace",
+                                fontSize: '0.65rem',
+                                letterSpacing: '0.18em',
+                                textTransform: 'uppercase',
+                                color: 'rgba(244,240,230,0.5)',
+                                transition: 'color 0.2s',
+                            }}
+                                onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold-light)')}
+                                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,240,230,0.5)')}
+                            >
+                                {label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+                <LanguageToggle dark />
+            </div>
         </nav>
     )
 }

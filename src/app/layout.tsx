@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   title: 'Hidden Maps',
@@ -11,7 +12,6 @@ export const metadata: Metadata = {
     url: 'https://hiddenmaps.app',
     siteName: 'Hidden Maps',
   },
-  icons: { icon: '/icon.svg' }
 }
 
 export default function RootLayout({
@@ -21,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   )
 }

@@ -5,9 +5,11 @@ import Link from 'next/link'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
 import { articles, categories, categoryGroups } from '@/lib/articles'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ArticlesPage() {
     const [activeFilter, setActiveFilter] = useState('all')
+    const { language, t } = useLanguage()
 
     useEffect(() => {
         const reveals = document.querySelectorAll('.reveal')
@@ -29,7 +31,6 @@ export default function ArticlesPage() {
 
     return (
         <div style={{ background: 'var(--washi)', minHeight: '100vh' }}>
-            {/* Washi texture */}
             <div style={{
                 position: 'fixed', inset: 0, zIndex: 0, opacity: 0.3, pointerEvents: 'none',
                 backgroundImage: `
@@ -49,7 +50,6 @@ export default function ArticlesPage() {
             }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-end', gap: '3rem' }}>
                     <div>
-                        {/* Breadcrumb */}
                         <div style={{
                             fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em',
                             textTransform: 'uppercase', color: 'var(--faint)', marginBottom: '1.5rem',
@@ -57,32 +57,31 @@ export default function ArticlesPage() {
                         }}>
                             <Link href="/" style={{ color: 'var(--sepia)' }}>Hidden Maps</Link>
                             <span>/</span>
-                            <span>Articles</span>
+                            <span>{t.nav.articles}</span>
                         </div>
-
                         <h1 style={{
                             fontFamily: "'Cinzel', serif",
                             fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                             fontWeight: 400, lineHeight: 1,
                             color: 'var(--ink)', letterSpacing: '0.03em',
                         }}>
-                            The Hidden{' '}
+                            {language === 'ja' ? '隠れた' : 'The Hidden'}{' '}
                             <em style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, color: 'var(--deep-sepia)' }}>
-                                Layer
+                                {language === 'ja' ? '層' : 'Layer'}
                             </em>
                         </h1>
                         <p style={{ fontSize: '1rem', fontStyle: 'italic', color: 'var(--sepia)', marginTop: '1rem' }}>
-                            Ideas, theories and essays that reveal the structure underneath.
+                            {language === 'ja'
+                                ? 'アイデア、理論、そして構造を明らかにするエッセイ。'
+                                : 'Ideas, theories and essays that reveal the structure underneath.'}
                         </p>
                     </div>
-
-                    {/* Article count */}
                     <div style={{ textAlign: 'right' }}>
                         <span style={{ fontFamily: "'Cinzel', serif", fontSize: '4rem', fontWeight: 400, color: 'var(--ink)', opacity: 0.08, lineHeight: 1, display: 'block' }}>
                             {articles.length}
                         </span>
                         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--faint)' }}>
-                            Articles
+                            {language === 'ja' ? '記事' : 'Articles'}
                         </span>
                     </div>
                 </div>
@@ -97,19 +96,20 @@ export default function ArticlesPage() {
                 borderBottom: '1px solid rgba(139,115,85,0.15)',
             }}>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--faint)', marginRight: '0.6rem' }}>
-                    Filter
+                    {language === 'ja' ? 'フィルター' : 'Filter'}
                 </span>
                 {categories.map(cat => (
                     <button key={cat.key} onClick={() => setActiveFilter(cat.key)} style={{
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: '0.58rem', letterSpacing: '0.15em', textTransform: 'uppercase',
+                        fontFamily: language === 'ja' ? "'Noto Sans JP', sans-serif" : "'DM Mono', monospace",
+                        fontSize: '0.58rem', letterSpacing: language === 'ja' ? '0.05em' : '0.15em',
+                        textTransform: 'uppercase',
                         color: activeFilter === cat.key ? 'var(--parchment)' : 'var(--sepia)',
                         background: activeFilter === cat.key ? 'var(--ink)' : 'none',
                         border: activeFilter === cat.key ? '1px solid var(--ink)' : '1px solid rgba(139,115,85,0.25)',
                         padding: '0.45rem 1.1rem',
                         cursor: 'pointer', transition: 'all 0.2s',
                     }}>
-                        {cat.label}
+                        {language === 'ja' ? cat.labelJa : cat.label}
                     </button>
                 ))}
             </div>
@@ -119,8 +119,7 @@ export default function ArticlesPage() {
 
                 {/* AI Notice */}
                 <div className="reveal" style={{
-                    marginTop: '3rem',
-                    padding: '1.5rem 2rem',
+                    marginTop: '3rem', padding: '1.5rem 2rem',
                     border: '1px solid rgba(139,115,85,0.2)',
                     borderLeft: '3px solid var(--gold)',
                     background: 'rgba(255,255,255,0.3)',
@@ -130,8 +129,10 @@ export default function ArticlesPage() {
                         ◈ AI Authored
                     </span>
                     <p style={{ fontSize: '0.92rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.6 }}>
-                        <strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>These articles are written with Claude.</strong>{' '}
-                        Topics are chosen for ideas that genuinely open something up. AI-authored, human-curated, openly stated.
+                        {language === 'ja'
+                            ? <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>これらの記事はClaudeとの共同執筆です。</strong> テーマは本質的に何かを開くアイデアのために選ばれています。AI執筆、人間キュレーション、公明正大。</>
+                            : <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>These articles are written with Claude.</strong> Topics are chosen for ideas that genuinely open something up. AI-authored, human-curated, openly stated.</>
+                        }
                     </p>
                 </div>
 
@@ -140,30 +141,26 @@ export default function ArticlesPage() {
                     const groupArticles = articles.filter(a => a.category === group.key)
                     return (
                         <div key={group.key} className="reveal" style={{ marginTop: '4rem' }}>
-                            {/* Category Header */}
                             <div style={{
                                 display: 'flex', alignItems: 'center', gap: '1.5rem',
                                 marginBottom: '2rem', paddingBottom: '1rem',
                                 borderBottom: '1px solid rgba(139,115,85,0.2)',
                             }}>
                                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--rust)' }}>
-                                    {group.label}
+                                    {language === 'ja' ? group.labelJa : group.label}
                                 </span>
                                 <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(139,115,85,0.2), transparent)' }} />
                                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.15em', color: 'var(--faint)' }}>
-                                    {groupArticles.length} articles
+                                    {language === 'ja' ? `${groupArticles.length}記事` : `${groupArticles.length} articles`}
                                 </span>
                             </div>
-
-                            {/* Article Rows */}
                             {groupArticles.map(article => (
-                                <ArticleRow key={article.slug} article={article} />
+                                <ArticleRow key={article.slug} article={article} language={language} />
                             ))}
                         </div>
                     )
                 })}
 
-                {/* Atlas ornament */}
                 <div style={{ textAlign: 'center', padding: '4rem 0 2rem', opacity: 0.12 }}>
                     <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
                         <line x1="0" y1="20" x2="80" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
@@ -181,8 +178,10 @@ export default function ArticlesPage() {
     )
 }
 
-function ArticleRow({ article }: { article: { num: string; title: string; blurb: string; slug: string; image?: string } }) {
+function ArticleRow({ article, language }: { article: { num: string; title: string; titleJa: string; blurb: string; blurbJa: string; slug: string; image?: string }, language: string }) {
     const [hovered, setHovered] = useState(false)
+    const title = language === 'ja' ? article.titleJa : article.title
+    const blurb = language === 'ja' ? article.blurbJa : article.blurb
 
     return (
         <Link
@@ -200,7 +199,6 @@ function ArticleRow({ article }: { article: { num: string; title: string; blurb:
                 transition: 'background 0.2s',
             }}
         >
-            {/* Hover bg */}
             <div style={{
                 position: 'absolute', left: '-3rem', right: '-3rem', top: 0, bottom: 0,
                 background: 'rgba(255,255,255,0.5)',
@@ -213,45 +211,31 @@ function ArticleRow({ article }: { article: { num: string; title: string; blurb:
                 {article.num}
             </span>
 
-            {/* Thumbnail */}
             {article.image && (
-                <div style={{
-                    position: 'relative', zIndex: 1,
-                    width: 80, height: 54,
-                    overflow: 'hidden',
-                    flexShrink: 0,
-                    border: '1px solid rgba(139,115,85,0.2)',
-                }}>
-                    <img
-                        src={article.image}
-                        alt={article.title}
-                        style={{
-                            width: '100%', height: '100%',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            display: 'block',
-                            transition: 'transform 0.3s',
-                            transform: hovered ? 'scale(1.05)' : 'scale(1)',
-                        }}
-                    />
+                <div style={{ position: 'relative', zIndex: 1, width: 80, height: 54, overflow: 'hidden', border: '1px solid rgba(139,115,85,0.2)', flexShrink: 0 }}>
+                    <img src={article.image} alt={title} style={{
+                        width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block',
+                        transition: 'transform 0.3s', transform: hovered ? 'scale(1.05)' : 'scale(1)',
+                    }} />
                 </div>
             )}
 
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <h2 style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.3, marginBottom: '0.4rem',
+                    fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
+                    fontSize: language === 'ja' ? '1rem' : '1.2rem',
+                    fontWeight: 600, lineHeight: 1.3, marginBottom: '0.4rem',
                     color: hovered ? 'var(--deep-sepia)' : 'var(--ink)',
                     transition: 'color 0.2s',
                 }}>
-                    {article.title}
+                    {title}
                 </h2>
                 <p style={{ fontSize: '0.88rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.5 }}>
-                    {article.blurb}
+                    {blurb}
                 </p>
             </div>
 
-            <div style={{ position: 'relative', zIndex: 1, paddingTop: '0.3rem' }}>
+            <div style={{ position: 'relative', zIndex: 1 }}>
                 <span style={{
                     fontFamily: "'DM Mono', monospace", fontSize: '0.7rem',
                     color: hovered ? 'var(--rust)' : 'var(--faint)',

@@ -1,75 +1,78 @@
 export type Article = {
-    num: string
-    title: string
-    blurb: string
-    category: 'culture' | 'spirituality' | 'theory' | 'history' | 'science' | 'japan'
-    categoryLabel: string
-    slug: string
-    image?: string
+  num: string
+  title: string
+  blurb: string
+  titleJa: string
+  blurbJa: string
+  category: 'culture' | 'spirituality' | 'theory' | 'history' | 'science' | 'japan'
+  categoryLabel: string
+  categoryLabelJa: string
+  slug: string
+  image?: string
 }
 
 export const articles: Article[] = [
-    // CULTURE & SOCIETY
-    { num: '01', title: 'Floodplain vs Fractured-Sea Cultures: Why Geography Is Destiny', blurb: 'Why whole civilisations think differently — and why the answer lies in the shape of the land.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'floodplain-vs-fractured-sea', image: '/images/articles/floodplain-vs-fractured-sea.png' },
-    { num: '02', title: 'Why Dating Apps Structurally Fail Men — And How to Fix Them', blurb: 'The architecture of modern dating apps creates a structural mismatch that no better photo can fix.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'dating-apps-fail-men', image: '/images/articles/dating-apps-fail-men.jpeg' },
-    { num: '03', title: 'Debate Cultures vs Scolding Cultures', blurb: 'Two fundamentally different ways of handling disagreement — and what they reveal about a society.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'debate-vs-scolding-cultures', image: '/images/articles/debate-vs-scolding-cultures.png' },
-    { num: '04', title: 'Nordic Social Scripts: What Scandinavia Gets Right About Social Pressure', blurb: 'The hidden rules governing Scandinavian social life — and why they might be the most sophisticated system in the world.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'nordic-social-scripts', image: '/images/articles/nordic-social-scripts.jpeg' },
-    { num: '05', title: 'Was Edo Japan Happier Than Modern Japan?', blurb: 'A pre-industrial society with no growth economy, near-zero crime, and high life satisfaction. What can it teach us?', category: 'culture', categoryLabel: 'Culture & Society', slug: 'edo-japan-happiness', image: '/images/articles/edo-japan-happiness.png' },
-    { num: '06', title: 'How Cultures Misread Each Other in Australia', blurb: 'Australia as a collision point for incompatible social software — and what happens when nobody notices.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'cultures-misread-australia', image: '/images/articles/cultures-misread-australia.jpeg' },
-    { num: '07', title: 'East vs West: Different Kinds of Tough', blurb: 'Resilience looks different depending on where you were forged. Neither is stronger — they\'re built for different storms.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'east-vs-west-tough', image: '/images/articles/east-vs-west-tough.png' },
-    { num: '08', title: 'Relational Morality vs Principled Morality: Two Ways of Being Good', blurb: 'Is morality about universal rules or about the people in front of you? The answer divides civilisations.', category: 'culture', categoryLabel: 'Culture & Society', slug: 'relational-vs-principled-morality', image: '/images/articles/relational-vs-principled-morality.png' },
+  // CULTURE & SOCIETY
+  { num: '01', title: 'Floodplain vs Fractured-Sea Cultures: Why Geography Is Destiny', blurb: 'Why whole civilisations think differently — and why the answer lies in the shape of the land.', titleJa: '氾濫原文明と分裂海文明：地理はなぜ運命を決めるのか', blurbJa: '文明全体がなぜ異なる思考をするのか——その答えは土地の形にある。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'floodplain-vs-fractured-sea', image: '/images/articles/floodplain-vs-fractured-sea.png' },
+  { num: '02', title: 'Why Dating Apps Structurally Fail Men — And How to Fix Them', blurb: 'The architecture of modern dating apps creates a structural mismatch that no better photo can fix.', titleJa: 'マッチングアプリが男性に不利な構造的理由', blurbJa: '現代のマッチングアプリの設計には、写真を改善しても解決できない構造的ミスマッチがある。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'dating-apps-fail-men', image: '/images/articles/dating-apps-fail-men.jpeg' },
+  { num: '03', title: 'Debate Cultures vs Scolding Cultures', blurb: 'Two fundamentally different ways of handling disagreement — and what they reveal about a society.', titleJa: '議論文化と叱責文化', blurbJa: '意見の相違への二つの根本的アプローチ——それは社会の本質を映し出す。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'debate-vs-scolding-cultures', image: '/images/articles/debate-vs-scolding-cultures.png' },
+  { num: '04', title: 'Nordic Social Scripts: What Scandinavia Gets Right About Social Pressure', blurb: 'The hidden rules governing Scandinavian social life — and why they might be the most sophisticated system in the world.', titleJa: '北欧の社会スクリプト：スカンジナビアが社会的圧力について正しいこと', blurbJa: '北欧の社会生活を支配する隠れたルール——それは世界で最も洗練されたシステムかもしれない。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'nordic-social-scripts', image: '/images/articles/nordic-social-scripts.jpeg' },
+  { num: '05', title: 'Was Edo Japan Happier Than Modern Japan?', blurb: 'A pre-industrial society with no growth economy, near-zero crime, and high life satisfaction. What can it teach us?', titleJa: '江戸時代の日本は現代より幸福だったのか', blurbJa: '経済成長なし、ほぼゼロの犯罪率、高い生活満足度——前工業化社会から何を学べるか。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'edo-japan-happiness', image: '/images/articles/edo-japan-happiness.png' },
+  { num: '06', title: 'How Cultures Misread Each Other in Australia', blurb: 'Australia as a collision point for incompatible social software — and what happens when nobody notices.', titleJa: 'オーストラリアにおける文化の誤読', blurbJa: '相容れない社会的ソフトウェアの衝突点としてのオーストラリア——誰も気づかないと何が起きるか。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'cultures-misread-australia', image: '/images/articles/cultures-misread-australia.jpeg' },
+  { num: '07', title: 'East vs West: Different Kinds of Tough', blurb: "Resilience looks different depending on where you were forged. Neither is stronger — they're built for different storms.", titleJa: '東洋と西洋：異なる強さの形', blurbJa: 'どこで鍛えられたかによって、強さの姿は異なる。どちらが優れているわけではなく、異なる嵐のために作られている。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'east-vs-west-tough', image: '/images/articles/east-vs-west-tough.png' },
+  { num: '08', title: 'Relational Morality vs Principled Morality: Two Ways of Being Good', blurb: 'Is morality about universal rules or about the people in front of you? The answer divides civilisations.', titleJa: '関係的道徳と原則的道徳：二つの善のあり方', blurbJa: '道徳とは普遍的ルールのことか、それとも目の前の人々についてのものか——この答えが文明を分ける。', category: 'culture', categoryLabel: 'Culture & Society', categoryLabelJa: '文化・社会', slug: 'relational-vs-principled-morality', image: '/images/articles/relational-vs-principled-morality.png' },
 
-    // SPIRITUALITY & RELIGION
-    { num: '09', title: 'Gnosticism and the Demiurge: The Hidden Creation Story', blurb: 'What if the God who made the world isn\'t the highest God? The ancient heresy that still makes uncomfortable sense.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'gnosticism-and-the-demiurge', image: '/images/articles/gnosticism-and-the-demiurge.jpeg' },
-    { num: '10', title: 'The Gospel of Judas: Was He the Real Hero?', blurb: 'The suppressed gospel that rewrites the most famous betrayal in history.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'gospel-of-judas', image: '/images/articles/gospel-of-judas.jpeg' },
-    { num: '11', title: 'The Book of Enoch: What the Bible Left Out', blurb: 'Angels who fell for human women, giants who walked the earth, and a cosmology the early church buried.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'book-of-enoch', image: '/images/articles/book-of-enoch.jpeg' },
-    { num: '12', title: 'Is Christianity True? What the Evidence Actually Says', blurb: 'A fair, serious look at the historical and philosophical evidence — without assuming the answer in advance.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'is-christianity-true' },
-    { num: '13', title: 'Sophia: The Forgotten Feminine Divine', blurb: 'The goddess hidden inside Western monotheism — erased, suppressed, and still there if you know where to look.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'sophia-feminine-divine' },
-    { num: '14', title: 'Kensho vs Satori: Two Kinds of Awakening, Two Kinds of History', blurb: 'Zen distinguishes between a glimpse and full realisation. The difference maps onto how entire cultures understand transformation.', category: 'spirituality', categoryLabel: 'Spirituality & Religion', slug: 'kensho-vs-satori' },
+  // SPIRITUALITY & RELIGION
+  { num: '09', title: 'Gnosticism and the Demiurge: The Hidden Creation Story', blurb: "What if the God who made the world isn't the highest God? The ancient heresy that still makes uncomfortable sense.", titleJa: 'グノーシス主義とデミウルゴス：隠された創造の物語', blurbJa: '世界を作った神が最高の神でないとしたら？今もなお不穏な意味を持つ古代の異端思想。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'gnosticism-and-the-demiurge', image: '/images/articles/gnosticism-and-the-demiurge.jpeg' },
+  { num: '10', title: 'The Gospel of Judas: Was He the Real Hero?', blurb: 'The suppressed gospel that rewrites the most famous betrayal in history.', titleJa: 'ユダの福音書：彼は本当の英雄だったのか', blurbJa: '歴史上最も有名な裏切りを書き換える、抑圧された福音書。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'gospel-of-judas', image: '/images/articles/gospel-of-judas.jpeg' },
+  { num: '11', title: 'The Book of Enoch: What the Bible Left Out', blurb: 'Angels who fell for human women, giants who walked the earth, and a cosmology the early church buried.', titleJa: 'エノク書：聖書が省いたもの', blurbJa: '人間の女性に恋した天使、地を歩いた巨人、そして初期教会が埋葬した宇宙論。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'book-of-enoch', image: '/images/articles/book-of-enoch.jpeg' },
+  { num: '12', title: 'Is Christianity True? What the Evidence Actually Says', blurb: 'A fair, serious look at the historical and philosophical evidence — without assuming the answer in advance.', titleJa: 'キリスト教は真実か？証拠が実際に語ること', blurbJa: '答えを先に決めずに、歴史的・哲学的証拠を公平かつ真剣に検討する。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'is-christianity-true' },
+  { num: '13', title: 'Sophia: The Forgotten Feminine Divine', blurb: 'The goddess hidden inside Western monotheism — erased, suppressed, and still there if you know where to look.', titleJa: 'ソフィア：忘れられた女性神', blurbJa: '西洋一神教の内側に隠れた女神——消去され、抑圧され、それでもまだそこにいる。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'sophia-feminine-divine' },
+  { num: '14', title: 'Kensho vs Satori: Two Kinds of Awakening, Two Kinds of History', blurb: 'Zen distinguishes between a glimpse and full realisation. The difference maps onto how entire cultures understand transformation.', titleJa: '見性と悟り：二種類の覚醒、二種類の歴史', blurbJa: '禅は一瞥と完全な悟りを区別する。その違いは、文化全体が変容をどう理解するかに対応する。', category: 'spirituality', categoryLabel: 'Spirituality & Religion', categoryLabelJa: '精神・宗教', slug: 'kensho-vs-satori' },
 
-    // ORIGINAL THEORIES
-    { num: '15', title: 'Yin-Yang as a Fractal Map of the World', blurb: 'The ancient symbol isn\'t just about balance. It\'s a recursive model of how everything contains its opposite.', category: 'theory', categoryLabel: 'Original Theory', slug: 'yin-yang-fractal-map' },
-    { num: '16', title: 'Fusion: A Theory of How Civilisations Evolve', blurb: 'An original framework for understanding how cultures absorb, resist, and transform under contact with each other.', category: 'theory', categoryLabel: 'Original Theory', slug: 'fusion-theory' },
-    { num: '17', title: 'Uncertainty as Power: Why Not Knowing Is a Strategic Strength', blurb: 'The world rewards those who pretend to certainty. But the deepest strategic advantage may lie in the opposite direction.', category: 'theory', categoryLabel: 'Original Theory', slug: 'uncertainty-as-power' },
-    { num: '18', title: "Humanity as the Galaxy's Ungovernable Wild Card", blurb: "Why Earth's chaos, contradiction, and refusal to optimise might be our most important trait in a cosmic context.", category: 'theory', categoryLabel: 'Original Theory', slug: 'humanity-wild-card' },
-    { num: '19', title: 'How the Sage Digests the World: A Model of Meaning-Making', blurb: 'A framework for how wisdom traditions absorb experience — and why most people skip the most important step.', category: 'theory', categoryLabel: 'Original Theory', slug: 'sage-digests-the-world' },
+  // ORIGINAL THEORIES
+  { num: '15', title: 'Yin-Yang as a Fractal Map of the World', blurb: "The ancient symbol isn't just about balance. It's a recursive model of how everything contains its opposite.", titleJa: '陰陽：世界のフラクタル地図として', blurbJa: 'あの古代の象徴は単なるバランスではない。あらゆるものが対立を内包するという再帰的モデルだ。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'yin-yang-fractal-map' },
+  { num: '16', title: 'Fusion: A Theory of How Civilisations Evolve', blurb: 'An original framework for understanding how cultures absorb, resist, and transform under contact with each other.', titleJa: '融合論：文明の進化についての理論', blurbJa: '文化が互いに接触する中でいかに吸収し、抵抗し、変容するかを理解するための独自フレームワーク。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'fusion-theory' },
+  { num: '17', title: 'Uncertainty as Power: Why Not Knowing Is a Strategic Strength', blurb: 'The world rewards those who pretend to certainty. But the deepest strategic advantage may lie in the opposite direction.', titleJa: '不確実性という力：知らないことが戦略的強みになる理由', blurbJa: '世界は確実性を装う人を報いる。しかし最も深い戦略的優位は逆方向にあるかもしれない。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'uncertainty-as-power' },
+  { num: '18', title: "Humanity as the Galaxy's Ungovernable Wild Card", blurb: "Why Earth's chaos, contradiction, and refusal to optimise might be our most important trait in a cosmic context.", titleJa: '銀河の制御不能なワイルドカードとしての人類', blurbJa: '地球の混沌、矛盾、そして最適化への拒否が、宇宙的文脈で最も重要な特質かもしれない理由。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'humanity-wild-card' },
+  { num: '19', title: 'How the Sage Digests the World: A Model of Meaning-Making', blurb: 'A framework for how wisdom traditions absorb experience — and why most people skip the most important step.', titleJa: '賢者はいかに世界を消化するか：意味形成のモデル', blurbJa: '知恵の伝統が経験をいかに吸収するか——そしてなぜほとんどの人が最も重要なステップを飛ばすのか。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'sage-digests-the-world' },
 
-    // HISTORY & MYTHOLOGY
-    { num: '20', title: 'Queen Himiko and the Mystery of Yamatai', blurb: "Japan's first ruler was a shaman queen who vanished from the historical record. What really happened?", category: 'history', categoryLabel: 'History & Mythology', slug: 'queen-himiko-yamatai' },
-    { num: '21', title: "Amaterasu and Susanoo: Japan's Creation Myths Decoded", blurb: "The sun goddess and the storm god aren't just myths — they encode Japan's deepest tensions about order and chaos.", category: 'history', categoryLabel: 'History & Mythology', slug: 'amaterasu-and-susanoo' },
-    { num: '22', title: 'Did a Chinese Immortality-Seeker Found Japan?', blurb: 'The strange legend of Xu Fu — the man who sailed east looking for eternal life and may never have returned.', category: 'history', categoryLabel: 'History & Mythology', slug: 'xu-fu-founded-japan' },
-    { num: '23', title: 'Fukuzawa Yukichi: The Warning Japan Put on a Banknote and Then Ignored', blurb: "Japan's greatest moderniser spent his career warning that changing uniforms without changing minds would destroy everything. He was right.", category: 'history', categoryLabel: 'History & Mythology', slug: 'fukuzawa-yukichi' },
+  // HISTORY & MYTHOLOGY
+  { num: '20', title: 'Queen Himiko and the Mystery of Yamatai', blurb: "Japan's first ruler was a shaman queen who vanished from the historical record. What really happened?", titleJa: '卑弥呼と邪馬台国の謎', blurbJa: '日本最初の支配者はシャーマン女王だったが、歴史の記録から消えた。本当に何が起きたのか。', category: 'history', categoryLabel: 'History & Mythology', categoryLabelJa: '歴史・神話', slug: 'queen-himiko-yamatai' },
+  { num: '21', title: "Amaterasu and Susanoo: Japan's Creation Myths Decoded", blurb: "The sun goddess and the storm god aren't just myths — they encode Japan's deepest tensions about order and chaos.", titleJa: '天照大神とスサノオ：日本の創造神話の解読', blurbJa: '太陽の女神と嵐の神は単なる神話ではない——秩序と混沌についての日本の最も深い緊張を符号化している。', category: 'history', categoryLabel: 'History & Mythology', categoryLabelJa: '歴史・神話', slug: 'amaterasu-and-susanoo' },
+  { num: '22', title: 'Did a Chinese Immortality-Seeker Found Japan?', blurb: 'The strange legend of Xu Fu — the man who sailed east looking for eternal life and may never have returned.', titleJa: '中国の不死探求者が日本を建国したのか', blurbJa: '東へ向けて永遠の命を求めて航海し、二度と戻らなかったかもしれない男——徐福の奇妙な伝説。', category: 'history', categoryLabel: 'History & Mythology', categoryLabelJa: '歴史・神話', slug: 'xu-fu-founded-japan' },
+  { num: '23', title: 'Fukuzawa Yukichi: The Warning Japan Put on a Banknote and Then Ignored', blurb: "Japan's greatest moderniser spent his career warning that changing uniforms without changing minds would destroy everything. He was right.", titleJa: '福澤諭吉：日本が紙幣に刻み、無視した警告', blurbJa: '日本最大の近代化論者は、心を変えずに制服だけ変えれば全てが壊れると生涯警告し続けた。彼は正しかった。', category: 'history', categoryLabel: 'History & Mythology', categoryLabelJa: '歴史・神話', slug: 'fukuzawa-yukichi' },
 
-    // SCIENCE & MIND
-    { num: '24', title: 'Yamanaka Factors: Can We Reverse Ageing?', blurb: 'The Nobel Prize-winning discovery that cells can be reprogrammed — and what it might mean for the human lifespan.', category: 'science', categoryLabel: 'Science & Mind', slug: 'yamanaka-factors-ageing' },
-    { num: '25', title: 'The Simulation Hypothesis: How Seriously Should We Take It?', blurb: "Nick Bostrom's argument is logically airtight. That doesn't mean the conclusion isn't disturbing.", category: 'science', categoryLabel: 'Science & Mind', slug: 'simulation-hypothesis' },
+  // SCIENCE & MIND
+  { num: '24', title: 'Yamanaka Factors: Can We Reverse Ageing?', blurb: 'The Nobel Prize-winning discovery that cells can be reprogrammed — and what it might mean for the human lifespan.', titleJa: '山中因子：老化を逆転できるか', blurbJa: 'ノーベル賞受賞の発見——細胞は再プログラムできる。それが人間の寿命に何を意味するか。', category: 'science', categoryLabel: 'Science & Mind', categoryLabelJa: '科学・思想', slug: 'yamanaka-factors-ageing' },
+  { num: '25', title: 'The Simulation Hypothesis: How Seriously Should We Take It?', blurb: "Nick Bostrom's argument is logically airtight. That doesn't mean the conclusion isn't disturbing.", titleJa: 'シミュレーション仮説：どこまで真剣に考えるべきか', blurbJa: 'ニック・ボストロムの論証は論理的に隙がない。だからといって結論が不穏でないわけではない。', category: 'science', categoryLabel: 'Science & Mind', categoryLabelJa: '科学・思想', slug: 'simulation-hypothesis' },
 
-    // JAPAN & CULTURE
-    { num: '26', title: 'The Harmony Paradox: How Cultures That Suppress Small Conflicts Produce Catastrophic Ones', blurb: 'A culture of harmony sounds safer. The historical record suggests the opposite.', category: 'japan', categoryLabel: 'Japan & Culture', slug: 'harmony-paradox' },
-    { num: '27', title: 'The Emergency That Never Ended: How Temporary Crises Become Permanent Cultures', blurb: "Japan's Meiji leaders said the emergency measures were temporary. They weren't. The pattern is everywhere.", category: 'japan', categoryLabel: 'Japan & Culture', slug: 'emergency-that-never-ended' },
-    { num: '28', title: 'Tatemae and Honne: Why Japan Runs on Two Simultaneous Truths', blurb: 'Japan has an official position and a practical reality. Both are real. Neither is exactly a lie. Navigating the gap is a basic social skill.', category: 'japan', categoryLabel: 'Japan & Culture', slug: 'tatemae-and-honne' },
-    { num: '29', title: "Reading the Air: Japan's Invisible Legal System", blurb: "Japan's real rules aren't written down. They're in the air — and the enforcement is social, not institutional.", category: 'japan', categoryLabel: 'Japan & Culture', slug: 'reading-the-air' },
-    { num: '30', title: 'Survival Mode vs Thriving Mode: The Two Moral Operating Systems', blurb: 'Most ethical disagreements are really about time horizons. Two modes of morality, both internally coherent, producing very different behaviour.', category: 'theory', categoryLabel: 'Original Theory', slug: 'survival-mode-vs-thriving-mode' },
-    { num: '31', title: 'False Coherence: How Individuals and Societies Learn to Lie to Themselves', blurb: 'The story we tell to preserve our self-image. How it starts as a coping mechanism and ends as a liability.', category: 'theory', categoryLabel: 'Original Theory', slug: 'false-coherence' },
-    { num: '32', title: 'Why Free People Make Others Uncomfortable', blurb: "It's not what you've done. It's the question your existence silently asks: was the cost they paid actually necessary?", category: 'theory', categoryLabel: 'Original Theory', slug: 'why-free-people-make-others-uncomfortable' },
-    { num: '33', title: 'How Rules Stop Being Rules and Start Being Morality', blurb: 'Rules start as practical solutions. Then the context changes, but the rule stays — and somewhere it stops being a rule and becomes a moral truth.', category: 'theory', categoryLabel: 'Original Theory', slug: 'how-rules-become-morality' },
+  // JAPAN & CULTURE
+  { num: '26', title: 'The Harmony Paradox: How Cultures That Suppress Small Conflicts Produce Catastrophic Ones', blurb: 'A culture of harmony sounds safer. The historical record suggests the opposite.', titleJa: '調和のパラドックス：小さな衝突を抑圧する文化が大きな破局を生む理由', blurbJa: '調和の文化は安全に聞こえる。しかし歴史の記録はその逆を示唆している。', category: 'japan', categoryLabel: 'Japan & Culture', categoryLabelJa: '日本・文化', slug: 'harmony-paradox' },
+  { num: '27', title: 'The Emergency That Never Ended: How Temporary Crises Become Permanent Cultures', blurb: "Japan's Meiji leaders said the emergency measures were temporary. They weren't. The pattern is everywhere.", titleJa: '終わらない緊急事態：一時的な危機が永続的な文化になる方法', blurbJa: '明治のリーダーは緊急措置は一時的だと言った。そうではなかった。このパターンはどこにでもある。', category: 'japan', categoryLabel: 'Japan & Culture', categoryLabelJa: '日本・文化', slug: 'emergency-that-never-ended' },
+  { num: '28', title: 'Tatemae and Honne: Why Japan Runs on Two Simultaneous Truths', blurb: 'Japan has an official position and a practical reality. Both are real. Neither is exactly a lie. Navigating the gap is a basic social skill.', titleJa: '建前と本音：日本が二つの同時真実で動く理由', blurbJa: '日本には公式の立場と実際の現実がある。両方とも本物だ。どちらも厳密には嘘ではない。その隙間を渡ることが基本的な社会的スキルだ。', category: 'japan', categoryLabel: 'Japan & Culture', categoryLabelJa: '日本・文化', slug: 'tatemae-and-honne' },
+  { num: '29', title: "Reading the Air: Japan's Invisible Legal System", blurb: "Japan's real rules aren't written down. They're in the air — and the enforcement is social, not institutional.", titleJa: '空気を読む：日本の見えない法体系', blurbJa: '日本の本当のルールは書かれていない。それは空気の中にある——そして執行は制度的ではなく社会的だ。', category: 'japan', categoryLabel: 'Japan & Culture', categoryLabelJa: '日本・文化', slug: 'reading-the-air' },
+  { num: '30', title: 'Survival Mode vs Thriving Mode: The Two Moral Operating Systems', blurb: 'Most ethical disagreements are really about time horizons. Two modes of morality, both internally coherent, producing very different behaviour.', titleJa: 'サバイバルモードと繁栄モード：二つの道徳的オペレーティングシステム', blurbJa: 'ほとんどの倫理的対立は実際には時間軸の問題だ。どちらも内部的に一貫した二つの道徳モードが、非常に異なる行動を生む。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'survival-mode-vs-thriving-mode' },
+  { num: '31', title: 'False Coherence: How Individuals and Societies Learn to Lie to Themselves', blurb: 'The story we tell to preserve our self-image. How it starts as a coping mechanism and ends as a liability.', titleJa: '偽りの一貫性：個人と社会が自分自身に嘘をつく方法', blurbJa: '自己イメージを守るために語る物語。コーピングメカニズムとして始まり、負債として終わる。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'false-coherence' },
+  { num: '32', title: 'Why Free People Make Others Uncomfortable', blurb: "It's not what you've done. It's the question your existence silently asks: was the cost they paid actually necessary?", titleJa: '自由な人がなぜ他者を不快にするのか', blurbJa: 'あなたが何をしたかではない。あなたの存在が静かに問いかけることだ：彼らが払った代償は本当に必要だったのか？', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'why-free-people-make-others-uncomfortable' },
+  { num: '33', title: 'How Rules Stop Being Rules and Start Being Morality', blurb: 'Rules start as practical solutions. Then the context changes, but the rule stays — and somewhere it stops being a rule and becomes a moral truth.', titleJa: 'ルールがルールでなくなり道徳になる方法', blurbJa: 'ルールは実用的な解決策として始まる。やがて文脈が変わるがルールは残る——そしてどこかでルールでなく道徳的真実になる。', category: 'theory', categoryLabel: 'Original Theory', categoryLabelJa: '独自理論', slug: 'how-rules-become-morality' },
 ]
 
 export const categories = [
-    { key: 'all', label: 'All' },
-    { key: 'culture', label: 'Culture & Society' },
-    { key: 'spirituality', label: 'Spirituality' },
-    { key: 'theory', label: 'Original Theory' },
-    { key: 'history', label: 'History & Myth' },
-    { key: 'science', label: 'Science & Mind' },
-    { key: 'japan', label: 'Japan & Culture' },
+  { key: 'all', label: 'All', labelJa: 'すべて' },
+  { key: 'culture', label: 'Culture & Society', labelJa: '文化・社会' },
+  { key: 'spirituality', label: 'Spirituality', labelJa: '精神・宗教' },
+  { key: 'theory', label: 'Original Theory', labelJa: '独自理論' },
+  { key: 'history', label: 'History & Myth', labelJa: '歴史・神話' },
+  { key: 'science', label: 'Science & Mind', labelJa: '科学・思想' },
+  { key: 'japan', label: 'Japan & Culture', labelJa: '日本・文化' },
 ]
 
 export const categoryGroups = [
-    { key: 'culture', label: 'Culture & Society' },
-    { key: 'spirituality', label: 'Spirituality & Religion' },
-    { key: 'theory', label: 'Original Theories' },
-    { key: 'history', label: 'History & Mythology' },
-    { key: 'science', label: 'Science & Mind' },
-    { key: 'japan', label: 'Japan & Culture' },
+  { key: 'culture', label: 'Culture & Society', labelJa: '文化・社会' },
+  { key: 'spirituality', label: 'Spirituality & Religion', labelJa: '精神・宗教' },
+  { key: 'theory', label: 'Original Theories', labelJa: '独自理論' },
+  { key: 'history', label: 'History & Mythology', labelJa: '歴史・神話' },
+  { key: 'science', label: 'Science & Mind', labelJa: '科学・思想' },
+  { key: 'japan', label: 'Japan & Culture', labelJa: '日本・文化' },
 ]

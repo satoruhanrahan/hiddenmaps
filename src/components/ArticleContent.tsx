@@ -51,90 +51,89 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
       <header style={{
         position: 'relative', zIndex: 1,
         maxWidth: 1100, margin: '0 auto',
-        padding: article.image ? '2rem 3rem 4rem' : '8rem 3rem 4rem',
-        display: 'grid',
-        gridTemplateColumns: '1fr 320px',
-        gap: '5rem',
-        alignItems: 'end',
+        padding: article.image ? '2rem clamp(1.25rem, 5vw, 3rem) 3rem' : 'clamp(5rem, 12vw, 8rem) clamp(1.25rem, 5vw, 3rem) 3rem',
         borderBottom: '1px solid rgba(139,115,85,0.15)',
       }}>
-        <div>
-          {/* Breadcrumb */}
-          <div style={{
-            fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.22em',
-            textTransform: 'uppercase', color: 'var(--faint)',
-            display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '2.5rem',
-          }}>
-            <Link href="/" style={{ color: 'var(--sepia)' }}>Hidden Maps</Link>
-            <span>/</span>
-            <Link href="/articles" style={{ color: 'var(--sepia)' }}>
-              {language === 'ja' ? '記事' : 'Articles'}
-            </Link>
-            <span>/</span>
-            <span>{article.num}</span>
+        <div className="article-header-grid">
+          <div>
+            {/* Breadcrumb */}
+            <div style={{
+              fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.22em',
+              textTransform: 'uppercase', color: 'var(--faint)',
+              display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '2rem',
+              flexWrap: 'wrap',
+            }}>
+              <Link href="/" style={{ color: 'var(--sepia)' }}>Hidden Maps</Link>
+              <span>/</span>
+              <Link href="/articles" style={{ color: 'var(--sepia)' }}>
+                {language === 'ja' ? '記事' : 'Articles'}
+              </Link>
+              <span>/</span>
+              <span>{article.num}</span>
+            </div>
+
+            {/* Category */}
+            <div style={{
+              fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.28em',
+              textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '1.2rem',
+            }}>
+              {categoryLabel}
+            </div>
+
+            {/* Title */}
+            <h1 style={{
+              fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
+              fontSize: language === 'ja' ? 'clamp(1.4rem, 4vw, 2.8rem)' : 'clamp(1.7rem, 5vw, 3.5rem)',
+              fontWeight: language === 'ja' ? 700 : 600,
+              lineHeight: 1.15,
+              color: 'var(--ink)', marginBottom: '1.5rem',
+            }}>
+              {title}
+            </h1>
+
+            {/* Blurb */}
+            <p style={{
+              fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Bitter', serif",
+              fontSize: language === 'ja' ? 'clamp(0.95rem, 2vw, 1.05rem)' : 'clamp(1rem, 2.5vw, 1.18rem)',
+              fontStyle: 'italic', lineHeight: 1.7,
+              color: 'var(--deep-sepia)',
+            }}>
+              {blurb}
+            </p>
           </div>
 
-          {/* Category */}
-          <div style={{
-            fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.28em',
-            textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '1.2rem',
-          }}>
-            {categoryLabel}
+          {/* Sidebar meta — hidden on mobile */}
+          <div className="article-sidebar" style={{ paddingBottom: '0.5rem' }}>
+            <div style={{
+              fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: 'var(--faint)',
+              borderTop: '1px solid rgba(139,115,85,0.2)', paddingTop: '1rem', marginBottom: '0.8rem',
+            }}>
+              {language === 'ja' ? '記録番号' : 'Record No.'}
+            </div>
+            <div style={{ fontFamily: "'Cinzel', serif", fontSize: '2.5rem', fontWeight: 400, color: 'var(--ink)', opacity: 0.15, lineHeight: 1 }}>
+              {article.num}
+            </div>
+            <div style={{
+              marginTop: '2rem',
+              fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.15em',
+              color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '0.5rem',
+            }}>
+              ◈ {language === 'ja' ? 'AI執筆' : 'AI Authored'}
+            </div>
           </div>
-
-          {/* Title */}
-          <h1 style={{
-            fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
-            fontSize: language === 'ja' ? 'clamp(1.6rem, 4vw, 2.8rem)' : 'clamp(2rem, 5vw, 3.5rem)',
-            fontWeight: language === 'ja' ? 700 : 600,
-            lineHeight: 1.15,
-            color: 'var(--ink)', marginBottom: '1.8rem',
-          }}>
-            {title}
-          </h1>
-
-          {/* Blurb */}
-          <p style={{
-            fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Bitter', serif",
-            fontSize: language === 'ja' ? '1.05rem' : '1.18rem',
-            fontStyle: 'italic', lineHeight: 1.7,
-            color: 'var(--deep-sepia)',
-          }}>
-            {blurb}
-          </p>
-        </div>
-
-        {/* Sidebar meta */}
-        <div style={{ paddingBottom: '0.5rem' }}>
-          <div style={{
-            fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em',
-            textTransform: 'uppercase', color: 'var(--faint)',
-            borderTop: '1px solid rgba(139,115,85,0.2)', paddingTop: '1rem', marginBottom: '0.8rem',
-          }}>
-            {language === 'ja' ? '記録番号' : 'Record No.'}
-          </div>
-          <div style={{ fontFamily: "'Cinzel', serif", fontSize: '2.5rem', fontWeight: 400, color: 'var(--ink)', opacity: 0.15, lineHeight: 1 }}>
-            {article.num}
-          </div>
-          <div style={{
-            marginTop: '2rem',
-            fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.15em',
-            color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '0.5rem',
-          }}>
-            ◈ {language === 'ja' ? 'AI執筆' : 'AI Authored'}
-          </div>
-        </div>
+        </div>{/* end article-header-grid */}
       </header>
 
       {/* Article Body */}
       <article style={{
         position: 'relative', zIndex: 1,
         maxWidth: 760, margin: '0 auto',
-        padding: '5rem 3rem 6rem',
+        padding: 'clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 8vw, 6rem)',
       }}>
         <div className="prose" style={{
           fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Bitter', serif",
-          fontSize: language === 'ja' ? '1.05rem' : '1.12rem',
+          fontSize: language === 'ja' ? 'clamp(0.95rem, 2vw, 1.05rem)' : 'clamp(1rem, 2vw, 1.12rem)',
           lineHeight: language === 'ja' ? 2.0 : 1.85,
           color: 'var(--ink)',
         }}>
@@ -184,6 +183,23 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
           </Link>
         ) : <div />}
       </nav>
+
+      <style>{`
+        .article-header-grid {
+          display: grid;
+          grid-template-columns: 1fr 280px;
+          gap: 4rem;
+          align-items: end;
+        }
+        .article-sidebar { display: block; }
+        @media (max-width: 768px) {
+          .article-header-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+          .article-sidebar { display: none; }
+        }
+      `}</style>
     </>
   )
 }

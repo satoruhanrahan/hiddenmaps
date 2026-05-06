@@ -21,6 +21,17 @@
   --gold: #c9922a;
   --gold-light: #e8b84b;
   --faint: #c8bfa8;
+
+  /* Spacing scale */
+  --px: 1.5rem;
+  --px-md: 2rem;
+  --px-lg: 3rem;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --px: 1.1rem;
+  }
 }
 
 html {
@@ -34,6 +45,12 @@ body {
   font-size: 17px;
   line-height: 1.7;
   overflow-x: hidden;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
 }
 
 /* Grain overlay */
@@ -74,4 +91,40 @@ body::after {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* Responsive prose */
+.prose h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 2.5rem 0 1rem;
+  color: var(--ink);
+}
+
+.prose p {
+  margin-bottom: 1.4rem;
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--deep-sepia);
+}
+
+/* Mobile hamburger overlay */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 7, 0.6);
+  z-index: 190;
+  backdrop-filter: blur(2px);
+}
+
+.mobile-menu-overlay.open {
+  display: block;
 }

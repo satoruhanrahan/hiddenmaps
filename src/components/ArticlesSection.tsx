@@ -16,20 +16,6 @@ const featuredArticles = featuredSlugs
     .map(slug => allArticles.find(a => a.slug === slug))
     .filter(Boolean) as typeof allArticles
 
-const AtlasCorner = ({ flip }: { flip?: boolean }) => (
-    <svg style={{
-        position: 'absolute', width: 80, height: 80, opacity: 0.12,
-        top: '2rem', ...(flip ? { right: '2rem', transform: 'scaleX(-1)' } : { left: '2rem' }),
-    }} viewBox="0 0 80 80" fill="none">
-        <line x1="0" y1="0" x2="80" y2="0" stroke="#5c4a2a" strokeWidth="2" />
-        <line x1="0" y1="0" x2="0" y2="80" stroke="#5c4a2a" strokeWidth="2" />
-        <line x1="10" y1="10" x2="50" y2="10" stroke="#5c4a2a" strokeWidth="0.5" />
-        <line x1="10" y1="10" x2="10" y2="50" stroke="#5c4a2a" strokeWidth="0.5" />
-        <line x1="20" y1="20" x2="40" y2="20" stroke="#5c4a2a" strokeWidth="0.5" />
-        <line x1="20" y1="20" x2="20" y2="40" stroke="#5c4a2a" strokeWidth="0.5" />
-    </svg>
-)
-
 export default function ArticlesSection() {
     const { language } = useLanguage()
     const ja = language === 'ja'
@@ -46,74 +32,113 @@ export default function ArticlesSection() {
         `,
             }} />
 
-            <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '6rem 3rem' }}>
-                <AtlasCorner />
-                <AtlasCorner flip />
+            <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem)' }}>
 
-                <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem' }}>
+                {/* Header */}
+                <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 'clamp(2rem, 5vw, 3.5rem)', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'var(--rust)', display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
                             {ja ? 'アイデアとエッセイ' : 'Ideas & Essays'}
                             <span style={{ width: 50, height: 1, background: 'var(--rust)', display: 'block' }} />
                         </div>
-                        <h2 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cinzel', serif", fontSize: '2.3rem', fontWeight: ja ? 700 : 400, letterSpacing: '0.04em' }}>
+                        <h2 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cinzel', serif", fontSize: 'clamp(1.6rem, 5vw, 2.3rem)', fontWeight: ja ? 700 : 400, letterSpacing: '0.04em' }}>
                             {ja ? '隠れた層' : 'The Hidden Layer'}
                         </h2>
                     </div>
-                    <Link href="/articles" style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--sepia)', borderBottom: '1px solid var(--faint)', paddingBottom: '0.2rem' }}>
+                    <Link href="/articles" style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--sepia)', borderBottom: '1px solid var(--faint)', paddingBottom: '0.2rem', whiteSpace: 'nowrap' }}>
                         {ja ? `全${allArticles.length}記事 →` : `All ${allArticles.length} Articles →`}
                     </Link>
                 </div>
 
-                <div className="reveal reveal-delay-1" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gridTemplateRows: 'auto auto', border: '1px solid rgba(139,115,85,0.25)' }}>
+                {/* Grid — stacks on mobile */}
+                <div className="reveal reveal-delay-1 articles-grid" style={{ border: '1px solid rgba(139,115,85,0.25)' }}>
+                    {/* Featured */}
                     {featured && (
-                        <Link href={`/articles/${featured.slug}`} style={{ gridRow: 'span 2', borderRight: '1px solid rgba(139,115,85,0.3)', background: 'rgba(255,255,255,0.3)', display: 'flex', flexDirection: 'column', transition: 'background 0.3s', overflow: 'hidden' }}>
+                        <Link href={`/articles/${featured.slug}`} className="featured-card" style={{ background: 'rgba(255,255,255,0.3)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                             {featured.image && (
-                                <div style={{ width: '100%', height: 220, overflow: 'hidden', flexShrink: 0 }}>
+                                <div style={{ width: '100%', height: 'clamp(160px, 25vw, 220px)', overflow: 'hidden', flexShrink: 0 }}>
                                     <img src={featured.image} alt={ja ? featured.titleJa : featured.title}
                                         style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
                                 </div>
                             )}
-                            <div style={{ padding: '2.5rem 3rem', flex: 1 }}>
+                            <div style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)', flex: 1 }}>
                                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.6rem' }}>
                                     {ja ? '記録番号' : 'Record No.'} {featured.num}
                                 </div>
                                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.9rem' }}>
                                     {ja ? featured.categoryLabelJa : featured.categoryLabel}
                                 </div>
-                                <h3 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif", fontSize: ja ? '1.4rem' : '1.85rem', fontWeight: 600, lineHeight: 1.2, marginBottom: '1.2rem' }}>
+                                <h3 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif", fontSize: ja ? 'clamp(1.1rem, 3vw, 1.4rem)' : 'clamp(1.3rem, 4vw, 1.85rem)', fontWeight: 600, lineHeight: 1.2, marginBottom: '1rem' }}>
                                     {ja ? featured.titleJa : featured.title}
                                 </h3>
-                                <p style={{ fontSize: '0.98rem', color: 'var(--sepia)', fontStyle: 'italic', lineHeight: 1.75, fontFamily: ja ? "'Noto Serif JP', serif" : 'inherit' }}>
+                                <p style={{ fontSize: 'clamp(0.88rem, 2vw, 0.98rem)', color: 'var(--sepia)', fontStyle: 'italic', lineHeight: 1.75, fontFamily: ja ? "'Noto Serif JP', serif" : 'inherit' }}>
                                     {ja ? featured.blurbJa : featured.blurb}
                                 </p>
                             </div>
                         </Link>
                     )}
 
-                    {rest.map((article, i) => (
-                        <Link key={article.slug} href={`/articles/${article.slug}`} style={{ border: '1px solid rgba(139,115,85,0.15)', background: 'rgba(255,255,255,0.3)', display: 'flex', flexDirection: 'column', transition: 'background 0.3s', overflow: 'hidden', borderBottom: i < 2 ? '1px solid rgba(139,115,85,0.2)' : undefined }}>
-                            {article.image && (
-                                <div style={{ width: '100%', height: 120, overflow: 'hidden', flexShrink: 0 }}>
-                                    <img src={article.image} alt={ja ? article.titleJa : article.title}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+                    {/* Secondary cards */}
+                    <div className="secondary-cards">
+                        {rest.map((article) => (
+                            <Link key={article.slug} href={`/articles/${article.slug}`} style={{ border: '1px solid rgba(139,115,85,0.15)', background: 'rgba(255,255,255,0.3)', display: 'flex', overflow: 'hidden' }}>
+                                {article.image && (
+                                    <div style={{ width: 80, height: '100%', minHeight: 80, overflow: 'hidden', flexShrink: 0 }}>
+                                        <img src={article.image} alt={ja ? article.titleJa : article.title}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                    </div>
+                                )}
+                                <div style={{ padding: 'clamp(1rem, 3vw, 1.5rem)', flex: 1 }}>
+                                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.4rem' }}>
+                                        {ja ? '記録番号' : 'Record No.'} {article.num}
+                                    </div>
+                                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.5rem' }}>
+                                        {ja ? article.categoryLabelJa : article.categoryLabel}
+                                    </div>
+                                    <h3 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif", fontSize: ja ? '0.95rem' : 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: 600, lineHeight: 1.3 }}>
+                                        {ja ? article.titleJa : article.title}
+                                    </h3>
                                 </div>
-                            )}
-                            <div style={{ padding: '2.2rem 2.5rem', flex: 1 }}>
-                                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.6rem' }}>
-                                    {ja ? '記録番号' : 'Record No.'} {article.num}
-                                </div>
-                                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.56rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.9rem' }}>
-                                    {ja ? article.categoryLabelJa : article.categoryLabel}
-                                </div>
-                                <h3 style={{ fontFamily: ja ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif", fontSize: ja ? '0.95rem' : '1.12rem', fontWeight: 600, lineHeight: 1.3 }}>
-                                    {ja ? article.titleJa : article.title}
-                                </h3>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
+
+            <style>{`
+        .articles-grid {
+          display: grid;
+          grid-template-columns: 1.5fr 1fr;
+        }
+        .featured-card {
+          border-right: 1px solid rgba(139,115,85,0.3);
+        }
+        .secondary-cards {
+          display: flex;
+          flex-direction: column;
+        }
+        .secondary-cards a {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          border-bottom: 1px solid rgba(139,115,85,0.15);
+        }
+        .secondary-cards a:last-child {
+          border-bottom: none;
+        }
+        @media (max-width: 768px) {
+          .articles-grid {
+            grid-template-columns: 1fr;
+          }
+          .featured-card {
+            border-right: none;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+          }
+          .secondary-cards a {
+            flex-direction: row;
+          }
+        }
+      `}</style>
         </section>
     )
 }

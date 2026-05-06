@@ -45,7 +45,7 @@ export default function ArticlesPage() {
             <header style={{
                 position: 'relative', zIndex: 1,
                 maxWidth: 1200, margin: '0 auto',
-                padding: '9rem 3rem 4rem',
+                padding: 'clamp(5rem,12vw,9rem) clamp(1.25rem,5vw,3rem) clamp(2rem,5vw,4rem)',
                 borderBottom: '1px solid rgba(139,115,85,0.2)',
             }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-end', gap: '3rem' }}>
@@ -91,7 +91,7 @@ export default function ArticlesPage() {
             <div style={{
                 position: 'relative', zIndex: 1,
                 maxWidth: 1200, margin: '0 auto',
-                padding: '2rem 3rem',
+                padding: 'clamp(1.25rem,3vw,2rem) clamp(1.25rem,5vw,3rem)',
                 display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap',
                 borderBottom: '1px solid rgba(139,115,85,0.15)',
             }}>
@@ -115,7 +115,7 @@ export default function ArticlesPage() {
             </div>
 
             {/* Main */}
-            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 3rem 6rem' }}>
+            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.25rem,5vw,3rem) clamp(3rem,8vw,6rem)' }}>
 
                 {/* AI Notice */}
                 <div className="reveal" style={{
@@ -190,13 +190,12 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
             onMouseLeave={() => setHovered(false)}
             style={{
                 display: 'grid',
-                gridTemplateColumns: article.image ? '3rem 80px 1fr auto' : '3rem 1fr auto',
+                gridTemplateColumns: article.image ? 'clamp(2rem,4vw,3rem) clamp(60px,8vw,80px) 1fr auto' : 'clamp(2rem,4vw,3rem) 1fr auto',
                 alignItems: 'center',
-                gap: '1.5rem',
-                padding: '1.8rem 0',
+                gap: 'clamp(0.8rem,2vw,1.5rem)',
+                padding: '1.5rem 0',
                 borderBottom: '1px solid rgba(139,115,85,0.1)',
                 position: 'relative',
-                transition: 'background 0.2s',
             }}
         >
             <div style={{

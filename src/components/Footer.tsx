@@ -19,7 +19,20 @@ export default function Footer() {
                 </span>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.12em', color: 'rgba(201,146,42,0.35)', textAlign: 'right', lineHeight: 2 }}>
                     35.6762° N, 139.6503° E<br />
-                    hiddenmaps.app
+                    hiddenmaps.app<br />
+                    <a
+                        href="https://instagram.com/hiddenmaps.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: 'rgba(201,146,42,0.35)', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }}
+                    >
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+                        </svg>
+                        @hiddenmaps.app
+                    </a>
                 </div>
             </div>
         </footer>

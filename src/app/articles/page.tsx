@@ -188,9 +188,10 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
             href={`/articles/${article.slug}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
+            className="article-row"
             style={{
                 display: 'grid',
-                gridTemplateColumns: article.image ? 'clamp(2rem,4vw,3rem) clamp(60px,8vw,80px) 1fr auto' : 'clamp(2rem,4vw,3rem) 1fr auto',
+                gridTemplateColumns: article.image ? 'clamp(2rem,4vw,3rem) clamp(60px,8vw,80px) 1fr' : 'clamp(2rem,4vw,3rem) 1fr',
                 alignItems: 'center',
                 gap: 'clamp(0.8rem,2vw,1.5rem)',
                 padding: '1.5rem 0',
@@ -211,7 +212,7 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
             </span>
 
             {article.image && (
-                <div style={{ position: 'relative', zIndex: 1, width: 80, height: 54, overflow: 'hidden', border: '1px solid rgba(139,115,85,0.2)', flexShrink: 0 }}>
+                <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 54, overflow: 'hidden', border: '1px solid rgba(139,115,85,0.2)', flexShrink: 0 }}>
                     <img src={article.image} alt={title} style={{
                         width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block',
                         transition: 'transform 0.3s', transform: hovered ? 'scale(1.05)' : 'scale(1)',
@@ -219,7 +220,7 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
                 </div>
             )}
 
-            <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ position: 'relative', zIndex: 1, minWidth: 0 }}>
                 <h2 style={{
                     fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
                     fontSize: language === 'ja' ? '1rem' : '1.2rem',
@@ -232,16 +233,6 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
                 <p style={{ fontSize: '0.88rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.5 }}>
                     {blurb}
                 </p>
-            </div>
-
-            <div style={{ position: 'relative', zIndex: 1 }}>
-                <span style={{
-                    fontFamily: "'DM Mono', monospace", fontSize: '0.7rem',
-                    color: hovered ? 'var(--rust)' : 'var(--faint)',
-                    transform: hovered ? 'translateX(4px)' : 'translateX(0)',
-                    transition: 'color 0.2s, transform 0.2s',
-                    display: 'inline-block',
-                }}>→</span>
             </div>
         </Link>
     )

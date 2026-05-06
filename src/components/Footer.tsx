@@ -24,9 +24,17 @@ export default function Footer() {
                         href="https://instagram.com/hiddenmaps.app"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: 'rgba(201,146,42,0.35)', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }}
+                        style={{
+                            color: 'rgba(244,240,230,0.6)',
+                            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                            marginTop: '0.5rem',
+                            padding: '0.45rem 0.9rem',
+                            border: '1px solid rgba(244,240,230,0.15)',
+                            letterSpacing: '0.15em',
+                            transition: 'color 0.2s, border-color 0.2s',
+                        }}
                     >
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                             <circle cx="12" cy="12" r="4" />
                             <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />

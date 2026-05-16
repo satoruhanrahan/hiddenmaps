@@ -186,8 +186,27 @@ function ArticlesPageInner() {
                 {/* Non-Japan category groups */}
                 {visibleGroups.filter(g => g.key !== 'japan').map(group => {
                     const groupArticles = articles.filter(a => a.category === group.key)
+
+                    // Define series within each category
+                    const seriesMap: Record<string, { key: string; label: string; labelJa: string; slugs: string[] }[]> = {
+                        culture: [
+                            { key: 'geography', label: 'The Geography of Power', labelJa: '権力の地理学', slugs: ['floodplain-vs-fractured-sea', 'geography-of-hierarchy', 'two-shapes-of-hierarchy'] },
+                            { key: 'humour', label: 'What Humour Actually Is', labelJa: 'ユーモアとは何か', slugs: ['what-humor-actually-is', 'japan-comedy-restored-order', 'the-wests-many-anxieties', 'banter'] },
+                            { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
+                            { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
+                        ],
+                        spirituality: [
+                            { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
+                        ],
+                    }
+
+                    const seriesList = seriesMap[group.key] || []
+                    const seriesSlugs = seriesList.flatMap(s => s.slugs)
+                    const standaloneArticles = groupArticles.filter(a => !seriesSlugs.includes(a.slug))
+
                     return (
                         <div key={group.key} className="reveal" style={{ marginTop: '4rem' }}>
+                            {/* Group header */}
                             <div style={{
                                 display: 'flex', alignItems: 'center', gap: '1.5rem',
                                 marginBottom: '2rem', paddingBottom: '1rem',
@@ -201,9 +220,45 @@ function ArticlesPageInner() {
                                     {language === 'ja' ? `${groupArticles.length}記事` : `${groupArticles.length} articles`}
                                 </span>
                             </div>
-                            {groupArticles.map(article => (
+
+                            {/* Standalone articles first */}
+                            {standaloneArticles.map(article => (
                                 <ArticleRow key={article.slug} article={article} language={language} />
                             ))}
+
+                            {/* Series subsections */}
+                            {seriesList.map(series => {
+                                const seriesArticles = articles.filter(a => series.slugs.includes(a.slug))
+                                if (seriesArticles.length === 0) return null
+                                return (
+                                    <div key={series.key} style={{ marginTop: standaloneArticles.length > 0 ? '2.5rem' : '0', marginBottom: '1rem' }}>
+                                        <div style={{
+                                            display: 'flex', alignItems: 'center', gap: '1rem',
+                                            marginBottom: '1rem', paddingBottom: '0.7rem',
+                                            borderBottom: '1px solid rgba(139,115,85,0.15)',
+                                        }}>
+                                            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--sepia)' }}>
+                                                {language === 'ja' ? series.labelJa : series.label}
+                                            </span>
+                                            <span style={{
+                                                fontFamily: "'DM Mono', monospace", fontSize: '0.5rem',
+                                                letterSpacing: '0.15em', textTransform: 'uppercase',
+                                                color: 'var(--faint)', border: '1px solid rgba(139,115,85,0.2)',
+                                                padding: '0.15rem 0.5rem',
+                                            }}>
+                                                {language === 'ja' ? 'シリーズ' : 'Series'}
+                                            </span>
+                                            <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(139,115,85,0.15), transparent)' }} />
+                                            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', color: 'var(--faint)' }}>
+                                                {language === 'ja' ? `${seriesArticles.length}記事` : `${seriesArticles.length} articles`}
+                                            </span>
+                                        </div>
+                                        {seriesArticles.map(article => (
+                                            <ArticleRow key={article.slug} article={article} language={language} />
+                                        ))}
+                                    </div>
+                                )
+                            })}
                         </div>
                     )
                 })}
@@ -225,19 +280,9 @@ function ArticlesPageInner() {
             {/* Fukurou section — full width dark background */}
             {(activeFilter === 'all' || activeFilter === 'japan') && (() => {
                 const historyArticles = articles.filter(a => a.category === 'japan' && [
-                    'sekigahara-1-the-man-on-the-hill',
-                    'sekigahara-2-the-japan-that-never-was',
-                    'sekigahara-3-the-machinery-of-harmony',
-                    'sekigahara-4-a-different-people',
-                    'sekigahara-5-variables-not-constants',
                     'queen-himiko-yamatai',
                     'amaterasu-and-susanoo',
                     'xu-fu-founded-japan',
-                    'fukuzawa-1-who-he-was',
-                    'fukuzawa-2-the-warning',
-                    'fukuzawa-3-tokugawa-psychology',
-                    'fukuzawa-4-he-saw-it-happening',
-                    'fukuzawa-5-memorialisation',
                     'edo-japan-happiness',
                 ].includes(a.slug))
 
@@ -245,6 +290,29 @@ function ArticlesPageInner() {
                     'harmony-paradox',
                     'emergency-that-never-ended',
                     'reading-the-air',
+                ].includes(a.slug))
+
+                const fukuzawaArticles = articles.filter(a => a.category === 'japan' && [
+                    'fukuzawa-1-who-he-was',
+                    'fukuzawa-2-the-warning',
+                    'fukuzawa-3-tokugawa-psychology',
+                    'fukuzawa-4-he-saw-it-happening',
+                    'fukuzawa-5-memorialisation',
+                ].includes(a.slug))
+
+                const sekigaharaArticles = articles.filter(a => a.category === 'japan' && [
+                    'sekigahara-1-the-man-on-the-hill',
+                    'sekigahara-2-the-japan-that-never-was',
+                    'sekigahara-3-the-machinery-of-harmony',
+                    'sekigahara-4-a-different-people',
+                    'sekigahara-5-variables-not-constants',
+                ].includes(a.slug))
+
+                const negativityArticles = articles.filter(a => a.category === 'japan' && [
+                    'negativity-1-kotodama',
+                    'negativity-2-gambaru',
+                    'negativity-3-smooth-surface',
+                    'negativity-4-the-cost',
                 ].includes(a.slug))
 
                 const socialMapArticles = articles.filter(a => a.category === 'japan' && [
@@ -265,6 +333,9 @@ function ArticlesPageInner() {
                 const subsections = [
                     { key: 'history', label: language === 'ja' ? '歴史' : 'History', articles: historyArticles },
                     { key: 'society', label: language === 'ja' ? '社会・文化' : 'Society & Culture', articles: societyArticles },
+                    { key: 'sekigahara', label: language === 'ja' ? '関ヶ原' : 'Sekigahara', articles: sekigaharaArticles, series: true },
+                    { key: 'fukuzawa', label: language === 'ja' ? '福澤諭吉' : 'Fukuzawa Yukichi', articles: fukuzawaArticles, series: true },
+                    { key: 'negativity', label: language === 'ja' ? 'ネガティビティとの関係' : "Japan's Relationship with Negativity", articles: negativityArticles, series: true },
                     { key: 'socialmap', label: language === 'ja' ? '日本の社会地図' : "Japan's Social Map", articles: socialMapArticles, series: true },
                     { key: 'truth', label: language === 'ja' ? '二つの真実の基準' : 'Two Standards of Truth', articles: truthArticles, series: true },
                 ]

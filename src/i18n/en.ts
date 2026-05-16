@@ -1,17 +1,25 @@
 const en = {
   nav: {
+    layer: 'The Hidden Layers',
+    maps: 'Hidden Maps',
+    about: 'About',
+    // Subsections
+    fukurou: 'Fukurou',
+    history: 'History',
+    philosophy: 'Philosophy',
+    christianity: 'Christianity',
+    theory: 'Theory',
     articles: 'Articles',
     projects: 'Projects',
-    about: 'About',
   },
   hero: {
-    tagline: 'Charting what lies beneath.',
+    tagline: 'Observing the hidden.',
     subtitle: 'Essays on history, culture, civilisation, and the ideas that shape the world.',
     cta_articles: 'Read the Essays',
-    cta_projects: 'Explore the Maps',
+    cta_maps: 'Explore the Maps',
   },
   articles: {
-    heading: 'The Hidden Layer',
+    heading: 'The Hidden Layers',
     subheading: 'Ideas & Essays',
     all_articles: (n: number) => `All ${n} Articles →`,
     record_no: 'Record No.',
@@ -27,19 +35,19 @@ const en = {
     next: 'Next →',
   },
   projects: {
-    heading: 'Interactive Maps',
-    subheading: 'The Hidden Projects',
+    heading: 'Hidden Maps',
+    subheading: 'Interactive Tools',
     live: 'Live',
     dev: 'In Development',
     explore: 'Explore →',
   },
   about: {
-    heading: 'About Hidden Maps',
-    body: 'Hidden Maps is a personal project exploring the patterns beneath history, culture, and civilisation — through essays, interactive maps, and AI-assisted research.',
+    heading: 'About The Hidden Owl',
+    body: 'The Hidden Owl is a personal project exploring the patterns beneath history, culture, and civilisation — through essays, interactive maps, and AI-assisted research.',
   },
   footer: {
-    tagline: 'Charting what lies beneath.',
-    copyright: `© ${new Date().getFullYear()} Hidden Maps`,
+    tagline: 'Observing the hidden.',
+    copyright: `© ${new Date().getFullYear()} The Hidden Owl`,
   },
   categories: {
     all: 'All',

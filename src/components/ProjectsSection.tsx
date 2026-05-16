@@ -53,7 +53,7 @@ export default function ProjectsSection() {
                         <span style={{ width: 50, height: 1, background: 'var(--gold)', display: 'block' }} />
                     </div>
                     <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(1.6rem, 5vw, 2.3rem)', fontWeight: 400, letterSpacing: '0.04em', color: 'var(--parchment)', marginBottom: 'clamp(2rem, 5vw, 3.5rem)' }}>
-                        {ja ? 'プロジェクト' : 'The Workshop'}
+                        {ja ? 'ヒドゥンマップス' : 'Hidden Maps'}
                     </h2>
                 </div>
 

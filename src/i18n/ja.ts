@@ -2,15 +2,22 @@ import type { Translations } from './en'
 
 const ja: Translations = {
   nav: {
+    layer: '隠れた層',
+    maps: 'ヒドゥンマップス',
+    about: '概要',
+    fukurou: '不苦労',
+    history: '歴史',
+    philosophy: '哲学',
+    christianity: 'キリスト教',
+    theory: '独自理論',
     articles: '記事',
     projects: 'プロジェクト',
-    about: '概要',
   },
   hero: {
-    tagline: '隠れた地図を読む。',
+    tagline: '隠れたものを観る。',
     subtitle: '歴史・文化・文明、そして世界を形づくるアイデアについてのエッセイ。',
     cta_articles: 'エッセイを読む',
-    cta_projects: '地図を探る',
+    cta_maps: '地図を探る',
   },
   articles: {
     heading: '隠れた層',
@@ -29,19 +36,19 @@ const ja: Translations = {
     next: '次の記事 →',
   },
   projects: {
-    heading: 'インタラクティブ地図',
-    subheading: 'プロジェクト',
+    heading: 'ヒドゥンマップス',
+    subheading: 'インタラクティブツール',
     live: '公開中',
     dev: '開発中',
     explore: '探る →',
   },
   about: {
-    heading: 'Hidden Mapsについて',
-    body: 'Hidden Mapsは、歴史・文化・文明の深層にあるパターンを、エッセイ・インタラクティブ地図・AIリサーチを通じて探る個人プロジェクトです。',
+    heading: 'ザ・ヒドゥンアウルについて',
+    body: 'The Hidden Owlは、歴史・文化・文明の深層にあるパターンを、エッセイ・インタラクティブ地図・AIリサーチを通じて探る個人プロジェクトです。',
   },
   footer: {
-    tagline: '隠れた地図を読む。',
-    copyright: `© ${new Date().getFullYear()} Hidden Maps`,
+    tagline: '隠れたものを観る。',
+    copyright: `© ${new Date().getFullYear()} The Hidden Owl`,
   },
   categories: {
     all: 'すべて',

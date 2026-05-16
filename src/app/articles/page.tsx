@@ -1,15 +1,36 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
 import { articles, categories, categoryGroups } from '@/lib/articles'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-export default function ArticlesPage() {
+// Map nav filter params to category keys
+const filterMap: Record<string, string> = {
+    japan: 'japan',
+    history: 'history',
+    culture: 'culture',
+    spirituality: 'spirituality',
+    theory: 'theory',
+    science: 'science',
+    all: 'all',
+}
+
+function ArticlesPageInner() {
     const [activeFilter, setActiveFilter] = useState('all')
     const { language, t } = useLanguage()
+    const searchParams = useSearchParams()
+
+    // Read ?filter= from URL on load
+    useEffect(() => {
+        const param = searchParams.get('filter')
+        if (param && filterMap[param]) {
+            setActiveFilter(filterMap[param])
+        }
+    }, [searchParams])
 
     useEffect(() => {
         const reveals = document.querySelectorAll('.reveal')
@@ -28,6 +49,22 @@ export default function ArticlesPage() {
     const visibleGroups = categoryGroups.filter(g =>
         activeFilter === 'all' || g.key === activeFilter
     )
+
+    // Display label for filter buttons — renames japan to Fukurou
+    function getCatLabel(cat: { key: string; label: string; labelJa?: string }) {
+        if (cat.key === 'japan') {
+            return language === 'ja' ? '不苦労' : 'Fukurou 不苦労'
+        }
+        return language === 'ja' ? (cat.labelJa || cat.label) : cat.label
+    }
+
+    // Display label for category group headers
+    function getGroupLabel(group: { key: string; label: string; labelJa?: string }) {
+        if (group.key === 'japan') {
+            return language === 'ja' ? 'Fukurou 不苦労' : 'Fukurou 不苦労'
+        }
+        return language === 'ja' ? (group.labelJa || group.label) : group.label
+    }
 
     return (
         <div style={{ background: 'var(--washi)', minHeight: '100vh' }}>
@@ -48,16 +85,24 @@ export default function ArticlesPage() {
                 padding: 'clamp(5rem,12vw,9rem) clamp(1.25rem,5vw,3rem) clamp(2rem,5vw,4rem)',
                 borderBottom: '1px solid rgba(139,115,85,0.2)',
             }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-end', gap: '3rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-end', gap: '3rem', flexWrap: 'wrap' }}>
                     <div>
                         <div style={{
                             fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em',
                             textTransform: 'uppercase', color: 'var(--faint)', marginBottom: '1.5rem',
-                            display: 'flex', alignItems: 'center', gap: '0.8rem',
+                            display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap',
                         }}>
-                            <Link href="/" style={{ color: 'var(--sepia)' }}>Hidden Maps</Link>
+                            <Link href="/" style={{ color: 'var(--sepia)' }}>The Hidden Owl</Link>
                             <span>/</span>
-                            <span>{t.nav.articles}</span>
+                            <span>{language === 'ja' ? '隠れた層' : 'The Hidden Layers'}</span>
+                            {activeFilter !== 'all' && (
+                                <>
+                                    <span>/</span>
+                                    <span style={{ color: 'var(--rust)' }}>
+                                        {getCatLabel(categories.find(c => c.key === activeFilter) || { key: activeFilter, label: activeFilter })}
+                                    </span>
+                                </>
+                            )}
                         </div>
                         <h1 style={{
                             fontFamily: "'Cinzel', serif",
@@ -67,7 +112,7 @@ export default function ArticlesPage() {
                         }}>
                             {language === 'ja' ? '隠れた' : 'The Hidden'}{' '}
                             <em style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, color: 'var(--deep-sepia)' }}>
-                                {language === 'ja' ? '層' : 'Layer'}
+                                {language === 'ja' ? '層' : 'Layers'}
                             </em>
                         </h1>
                         <p style={{ fontSize: '1rem', fontStyle: 'italic', color: 'var(--sepia)', marginTop: '1rem' }}>
@@ -91,7 +136,7 @@ export default function ArticlesPage() {
             <div style={{
                 position: 'relative', zIndex: 1,
                 maxWidth: 1200, margin: '0 auto',
-                padding: 'clamp(1.25rem,3vw,2rem) clamp(1.25rem,5vw,3rem)',
+                padding: `1rem clamp(1.25rem,5vw,3rem)`,
                 display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap',
                 borderBottom: '1px solid rgba(139,115,85,0.15)',
             }}>
@@ -109,35 +154,37 @@ export default function ArticlesPage() {
                         padding: '0.45rem 1.1rem',
                         cursor: 'pointer', transition: 'all 0.2s',
                     }}>
-                        {language === 'ja' ? cat.labelJa : cat.label}
+                        {getCatLabel(cat)}
                     </button>
                 ))}
             </div>
 
             {/* Main */}
-            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.25rem,5vw,3rem) clamp(3rem,8vw,6rem)' }}>
+            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: `0 clamp(1.25rem,5vw,3rem) ${activeFilter === 'japan' ? '0' : 'clamp(3rem,8vw,6rem)'}` }}>
 
-                {/* AI Notice */}
-                <div className="reveal" style={{
-                    marginTop: '3rem', padding: '1.5rem 2rem',
-                    border: '1px solid rgba(139,115,85,0.2)',
-                    borderLeft: '3px solid var(--gold)',
-                    background: 'rgba(255,255,255,0.3)',
-                    display: 'flex', alignItems: 'center', gap: '1.5rem',
-                }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
-                        ◈ AI Authored
-                    </span>
-                    <p style={{ fontSize: '0.92rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.6 }}>
-                        {language === 'ja'
-                            ? <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>これらの記事はClaudeとの共同執筆です。</strong> テーマは本質的に何かを開くアイデアのために選ばれています。AI執筆、人間キュレーション、公明正大。</>
-                            : <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>These articles are written with Claude.</strong> Topics are chosen for ideas that genuinely open something up. AI-authored, human-curated, openly stated.</>
-                        }
-                    </p>
-                </div>
+                {/* AI Notice — hidden when only Japan is shown */}
+                {activeFilter !== 'japan' && (
+                    <div className="reveal" style={{
+                        marginTop: '3rem', padding: '1.5rem 2rem',
+                        border: '1px solid rgba(139,115,85,0.2)',
+                        borderLeft: '3px solid var(--gold)',
+                        background: 'rgba(255,255,255,0.3)',
+                        display: 'flex', alignItems: 'center', gap: '1.5rem',
+                    }}>
+                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
+                            ◈ AI Authored
+                        </span>
+                        <p style={{ fontSize: '0.92rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.6 }}>
+                            {language === 'ja'
+                                ? <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>これらの記事はClaudeとの共同執筆です。</strong> テーマは本質的に何かを開くアイデアのために選ばれています。</>
+                                : <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>These essays are written with Claude.</strong> Topics are chosen for ideas that genuinely open something up.</>
+                            }
+                        </p>
+                    </div>
+                )}
 
-                {/* Category Groups */}
-                {visibleGroups.map(group => {
+                {/* Non-Japan category groups */}
+                {visibleGroups.filter(g => g.key !== 'japan').map(group => {
                     const groupArticles = articles.filter(a => a.category === group.key)
                     return (
                         <div key={group.key} className="reveal" style={{ marginTop: '4rem' }}>
@@ -147,7 +194,7 @@ export default function ArticlesPage() {
                                 borderBottom: '1px solid rgba(139,115,85,0.2)',
                             }}>
                                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--rust)' }}>
-                                    {language === 'ja' ? group.labelJa : group.label}
+                                    {getGroupLabel(group)}
                                 </span>
                                 <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(139,115,85,0.2), transparent)' }} />
                                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.15em', color: 'var(--faint)' }}>
@@ -161,27 +208,163 @@ export default function ArticlesPage() {
                     )
                 })}
 
-                <div style={{ textAlign: 'center', padding: '4rem 0 2rem', opacity: 0.12 }}>
-                    <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
-                        <line x1="0" y1="20" x2="80" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
-                        <line x1="120" y1="20" x2="200" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
-                        <circle cx="100" cy="20" r="8" stroke="#5c4a2a" strokeWidth="0.8" />
-                        <circle cx="100" cy="20" r="3" fill="#5c4a2a" />
-                        <line x1="100" y1="5" x2="100" y2="35" stroke="#5c4a2a" strokeWidth="0.8" />
-                        <line x1="85" y1="20" x2="115" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
-                    </svg>
-                </div>
+                {activeFilter !== 'japan' && (
+                    <div style={{ textAlign: 'center', padding: '4rem 0 2rem', opacity: 0.12 }}>
+                        <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
+                            <line x1="0" y1="20" x2="80" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
+                            <line x1="120" y1="20" x2="200" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
+                            <circle cx="100" cy="20" r="8" stroke="#5c4a2a" strokeWidth="0.8" />
+                            <circle cx="100" cy="20" r="3" fill="#5c4a2a" />
+                            <line x1="100" y1="5" x2="100" y2="35" stroke="#5c4a2a" strokeWidth="0.8" />
+                            <line x1="85" y1="20" x2="115" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
+                        </svg>
+                    </div>
+                )}
             </main>
+
+            {/* Fukurou section — full width dark background */}
+            {(activeFilter === 'all' || activeFilter === 'japan') && (() => {
+                const historyArticles = articles.filter(a => a.category === 'japan' && [
+                    'sekigahara-1-the-man-on-the-hill',
+                    'sekigahara-2-the-japan-that-never-was',
+                    'sekigahara-3-the-machinery-of-harmony',
+                    'sekigahara-4-a-different-people',
+                    'sekigahara-5-variables-not-constants',
+                    'queen-himiko-yamatai',
+                    'amaterasu-and-susanoo',
+                    'xu-fu-founded-japan',
+                    'fukuzawa-1-who-he-was',
+                    'fukuzawa-2-the-warning',
+                    'fukuzawa-3-tokugawa-psychology',
+                    'fukuzawa-4-he-saw-it-happening',
+                    'fukuzawa-5-memorialisation',
+                    'edo-japan-happiness',
+                ].includes(a.slug))
+
+                const societyArticles = articles.filter(a => a.category === 'japan' && [
+                    'harmony-paradox',
+                    'emergency-that-never-ended',
+                    'reading-the-air',
+                ].includes(a.slug))
+
+                const socialMapArticles = articles.filter(a => a.category === 'japan' && [
+                    'uchi-and-soto',
+                    'the-rings',
+                    'the-ranking',
+                ].includes(a.slug))
+
+                const truthArticles = articles.filter(a => a.category === 'japan' && [
+                    'tatemae-and-honne',
+                    'anti-kaizen-1-dual-epistemology',
+                    'anti-kaizen-2-edo-and-meiji',
+                    'anti-kaizen-3-falsification-apparatus',
+                    'anti-kaizen-4-inspection-records',
+                    'anti-kaizen-5-ghost-in-the-system',
+                ].includes(a.slug))
+
+                const subsections = [
+                    { key: 'history', label: language === 'ja' ? '歴史' : 'History', articles: historyArticles },
+                    { key: 'society', label: language === 'ja' ? '社会・文化' : 'Society & Culture', articles: societyArticles },
+                    { key: 'socialmap', label: language === 'ja' ? '日本の社会地図' : "Japan's Social Map", articles: socialMapArticles, series: true },
+                    { key: 'truth', label: language === 'ja' ? '二つの真実の基準' : 'Two Standards of Truth', articles: truthArticles, series: true },
+                ]
+
+                return (
+                    <section style={{
+                        background: 'var(--ink-soft)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                    }}>
+                        {/* Grid overlay */}
+                        <div style={{
+                            position: 'absolute', inset: 0, pointerEvents: 'none',
+                            backgroundImage: `linear-gradient(rgba(244,240,230,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(244,240,230,0.03) 1px, transparent 1px)`,
+                            backgroundSize: '40px 40px',
+                        }} />
+                        {/* Top/bottom accent lines */}
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, var(--gold), var(--rust), var(--gold), transparent)', opacity: 0.4 }} />
+                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, var(--gold), var(--rust), var(--gold), transparent)', opacity: 0.4 }} />
+
+                        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,6vw,5rem) clamp(1.25rem,5vw,3rem)' }}>
+
+                            {/* Fukurou header */}
+                            <div style={{ borderLeft: '3px solid var(--gold)', paddingLeft: '1.5rem', marginBottom: '3rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
+                                    <span style={{ fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.2em', color: 'var(--parchment)' }}>
+                                        Fukurou
+                                    </span>
+                                    <span style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.6rem', color: 'var(--gold)', lineHeight: 1 }}>
+                                        不苦労
+                                    </span>
+                                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(244,240,230,0.35)' }}>
+                                        — {language === 'ja' ? '日本' : 'Japan'}
+                                    </span>
+                                    <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(201,146,42,0.3), transparent)' }} />
+                                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.15em', color: 'rgba(244,240,230,0.3)' }}>
+                                        {language === 'ja'
+                                            ? `${articles.filter(a => a.category === 'japan').length}記事`
+                                            : `${articles.filter(a => a.category === 'japan').length} articles`}
+                                    </span>
+                                </div>
+                                <p style={{ marginTop: '0.6rem', fontSize: '0.85rem', fontStyle: 'italic', color: 'rgba(244,240,230,0.35)', lineHeight: 1.6 }}>
+                                    {language === 'ja'
+                                        ? '日本の歴史、社会、そして表面の下にある構造についてのエッセイ。'
+                                        : 'Essays on Japan — its history, society, and the structures beneath the surface.'}
+                                </p>
+                            </div>
+
+                            {/* Subsections */}
+                            {subsections.map(sub => sub.articles.length > 0 && (
+                                <div key={sub.key} style={{ marginBottom: '3.5rem' }}>
+                                    <div style={{
+                                        display: 'flex', alignItems: 'center', gap: '1rem',
+                                        marginBottom: '1.5rem', paddingBottom: '0.8rem',
+                                        borderBottom: '1px solid rgba(201,146,42,0.2)',
+                                    }}>
+                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--gold)' }}>
+                                            {sub.label}
+                                        </span>
+                                        {sub.series && (
+                                            <span style={{
+                                                fontFamily: "'DM Mono', monospace", fontSize: '0.5rem',
+                                                letterSpacing: '0.15em', textTransform: 'uppercase',
+                                                color: 'rgba(201,146,42,0.6)',
+                                                border: '1px solid rgba(201,146,42,0.3)',
+                                                padding: '0.15rem 0.5rem',
+                                            }}>
+                                                {language === 'ja' ? 'シリーズ' : 'Series'}
+                                            </span>
+                                        )}
+                                        <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(201,146,42,0.2), transparent)' }} />
+                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', color: 'rgba(244,240,230,0.25)' }}>
+                                            {language === 'ja' ? `${sub.articles.length}記事` : `${sub.articles.length} articles`}
+                                        </span>
+                                    </div>
+                                    {sub.articles.map(article => (
+                                        <ArticleRow key={article.slug} article={article} language={language} dark />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )
+            })()}
 
             <Footer />
         </div>
     )
 }
 
-function ArticleRow({ article, language }: { article: { num: string; title: string; titleJa: string; blurb: string; blurbJa: string; slug: string; image?: string }, language: string }) {
+function ArticleRow({ article, language, dark }: { article: { num: string; title: string; titleJa: string; blurb: string; blurbJa: string; slug: string; image?: string }, language: string, dark?: boolean }) {
     const [hovered, setHovered] = useState(false)
     const title = language === 'ja' ? article.titleJa : article.title
     const blurb = language === 'ja' ? article.blurbJa : article.blurb
+    const titleColor = dark ? 'rgba(244,240,230,0.85)' : 'var(--ink)'
+    const hoverColor = dark ? 'var(--gold-light)' : 'var(--deep-sepia)'
+    const blurbColor = dark ? 'rgba(244,240,230,0.35)' : 'var(--sepia)'
+    const borderColor = dark ? 'rgba(201,146,42,0.12)' : 'rgba(139,115,85,0.1)'
+    const hoverBg = dark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.5)'
+    const numColor = dark ? 'rgba(201,146,42,0.4)' : 'var(--faint)'
 
     return (
         <Link
@@ -195,24 +378,24 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
                 alignItems: 'center',
                 gap: 'clamp(0.8rem,2vw,1.5rem)',
                 padding: '1.5rem 0',
-                borderBottom: '1px solid rgba(139,115,85,0.1)',
+                borderBottom: `1px solid ${borderColor}`,
                 position: 'relative',
             }}
         >
             <div style={{
                 position: 'absolute', left: '-3rem', right: '-3rem', top: 0, bottom: 0,
-                background: 'rgba(255,255,255,0.5)',
+                background: hoverBg,
                 opacity: hovered ? 1 : 0,
                 transition: 'opacity 0.2s',
                 pointerEvents: 'none',
             }} />
 
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.1em', color: 'var(--faint)', position: 'relative', zIndex: 1 }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.1em', color: numColor, position: 'relative', zIndex: 1 }}>
                 {article.num}
             </span>
 
             {article.image && (
-                <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 54, overflow: 'hidden', border: '1px solid rgba(139,115,85,0.2)', flexShrink: 0 }}>
+                <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 54, overflow: 'hidden', border: `1px solid ${dark ? 'rgba(201,146,42,0.15)' : 'rgba(139,115,85,0.2)'}`, flexShrink: 0 }}>
                     <img src={article.image} alt={title} style={{
                         width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block',
                         transition: 'transform 0.3s', transform: hovered ? 'scale(1.05)' : 'scale(1)',
@@ -225,15 +408,23 @@ function ArticleRow({ article, language }: { article: { num: string; title: stri
                     fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
                     fontSize: language === 'ja' ? '1rem' : '1.2rem',
                     fontWeight: 600, lineHeight: 1.3, marginBottom: '0.4rem',
-                    color: hovered ? 'var(--deep-sepia)' : 'var(--ink)',
+                    color: hovered ? hoverColor : titleColor,
                     transition: 'color 0.2s',
                 }}>
                     {title}
                 </h2>
-                <p style={{ fontSize: '0.88rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.5 }}>
+                <p style={{ fontSize: '0.88rem', fontStyle: 'italic', color: blurbColor, lineHeight: 1.5 }}>
                     {blurb}
                 </p>
             </div>
         </Link>
+    )
+}
+
+export default function ArticlesPage() {
+    return (
+        <Suspense fallback={<div style={{ background: 'var(--washi)', minHeight: '100vh' }} />}>
+            <ArticlesPageInner />
+        </Suspense>
     )
 }

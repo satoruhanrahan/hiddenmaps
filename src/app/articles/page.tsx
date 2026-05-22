@@ -194,6 +194,8 @@ function ArticlesPageInner() {
                             { key: 'humour', label: 'What Humour Actually Is', labelJa: 'ユーモアとは何か', slugs: ['what-humor-actually-is', 'japan-comedy-restored-order', 'the-wests-many-anxieties', 'banter'] },
                             { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
                             { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
+                            { key: 'future', label: 'Culture Creates the Future', labelJa: '文化が未来を作る', slugs: ['culture-creates-the-future-01-cultural-comparative-advantage', 'culture-creates-the-future-02-automation-sharpens-the-divide', 'culture-creates-the-future-03-two-nations-two-strategies', 'culture-creates-the-future-04-australias-demographic-bet', 'culture-creates-the-future-05-creator-economy-wealth-of-worlds', 'culture-creates-the-future-06-where-creators-go-for-inspiration', 'culture-creates-the-future-07-where-creators-live', 'culture-creates-the-future-08-the-individual-universe'] },
+                            { key: 'wholeandpart', label: 'The Whole and the Part', labelJa: '全体と部分', slugs: ['article-1-the-cosmological-fork', 'article-2-the-language-of-survival', 'article-3-connection-as-assumption', 'article-4-symmetric-insecurities', 'article-5-the-structural-solution'] },
                         ],
                         spirituality: [
                             { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
@@ -330,12 +332,19 @@ function ArticlesPageInner() {
                     'anti-kaizen-5-ghost-in-the-system',
                 ].includes(a.slug))
 
+                const toBeJapaneseArticles = articles.filter(a => a.category === 'japan' && [
+                    'to-be-japanese',
+                    'why-the-fusion-runs-so-deep',
+                    'what-reckoning-actually-costs',
+                ].includes(a.slug))
+
                 const subsections = [
                     { key: 'history', label: language === 'ja' ? '歴史' : 'History', articles: historyArticles },
                     { key: 'society', label: language === 'ja' ? '社会・文化' : 'Society & Culture', articles: societyArticles },
                     { key: 'sekigahara', label: language === 'ja' ? '関ヶ原' : 'Sekigahara', articles: sekigaharaArticles, series: true },
                     { key: 'fukuzawa', label: language === 'ja' ? '福澤諭吉' : 'Fukuzawa Yukichi', articles: fukuzawaArticles, series: true },
                     { key: 'negativity', label: language === 'ja' ? 'ネガティビティとの関係' : "Japan's Relationship with Negativity", articles: negativityArticles, series: true },
+                    { key: 'tobejapanese', label: language === 'ja' ? '日本人であること' : 'To Be Japanese', articles: toBeJapaneseArticles, series: true },
                     { key: 'socialmap', label: language === 'ja' ? '日本の社会地図' : "Japan's Social Map", articles: socialMapArticles, series: true },
                     { key: 'truth', label: language === 'ja' ? '二つの真実の基準' : 'Two Standards of Truth', articles: truthArticles, series: true },
                 ]

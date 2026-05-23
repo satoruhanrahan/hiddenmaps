@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { articles, humanArticles } from '@/lib/articles'
+import { articles } from '@/lib/articles'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
 import ProgressBar from '@/components/ProgressBar'
@@ -10,26 +10,12 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-  return humanArticles.map(article => ({ slug: article.slug }))
+  return articles.map(article => ({ slug: article.slug }))
 }
 
-export async function generateMetadata({ params }: Props) {
+export default async function VaultArticlePage({ params }: Props) {
   const { slug } = await params
   const article = articles.find(a => a.slug === slug)
-  if (!article) return {}
-  return {
-    title: article.title,
-    description: article.blurb,
-    openGraph: {
-      title: article.title,
-      description: article.blurb,
-    },
-  }
-}
-
-export default async function ArticlePage({ params }: Props) {
-  const { slug } = await params
-  const article = humanArticles.find(a => a.slug === slug)
   if (!article) notFound()
 
   const index = articles.findIndex(a => a.slug === slug)
@@ -51,24 +37,13 @@ export default async function ArticlePage({ params }: Props) {
 
       {article.image && (
         <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '420px', overflow: 'hidden', marginTop: '52px' }}>
-          <img
-            src={article.image}
-            alt={article.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-          />
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, height: '160px',
-            background: 'linear-gradient(to bottom, transparent, var(--parchment))',
-          }} />
+          <img src={article.image} alt={article.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '160px', background: 'linear-gradient(to bottom, transparent, var(--parchment))' }} />
         </div>
       )}
 
-      <ArticleContent
-        article={article}
-        prev={prev}
-        next={next}
-        slug={slug}
-      />
+      <ArticleContent article={article} prev={prev} next={next} slug={slug} vaultMode />
 
       <Footer />
     </div>

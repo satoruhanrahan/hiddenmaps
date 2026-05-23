@@ -58,15 +58,6 @@ export default function AboutSection() {
                 <p style={{ fontSize: 'clamp(0.95rem, 2vw, 1.05rem)', color: 'var(--deep-sepia)', lineHeight: 1.85, marginBottom: '2rem' }}>
                   ここのエッセイは日本、歴史、哲学、宗教、そしてどこにも綺麗に収まらない独自の理論にまたがっている。すべてが、物事の下にある物事を見つけようとしている。
                 </p>
-
-                <div style={{ borderLeft: '2px solid rgba(139,115,85,0.3)', paddingLeft: '1.25rem', marginBottom: '1.4rem' }}>
-                  <p style={{ fontSize: '0.75rem', fontFamily: "'DM Mono', monospace", letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.6rem' }}>
-                    制作について
-                  </p>
-                  <p style={{ fontSize: 'clamp(0.88rem, 2vw, 0.95rem)', color: 'var(--deep-sepia)', lineHeight: 1.8 }}>
-                    エッセイはClaudeと共に書かれている——ゴーストライターとしてではなく、真の協力者として。アイデア、選択、フレーミング、そしてこだわりは人間のもの。文章はコラボレーション。
-                  </p>
-                </div>
               </>
             ) : (
               <>
@@ -79,15 +70,6 @@ export default function AboutSection() {
                 <p style={{ fontSize: 'clamp(0.95rem, 2vw, 1.05rem)', color: 'var(--deep-sepia)', lineHeight: 1.85, marginBottom: '2rem' }}>
                   The essays here span Japan, history, philosophy, religion, and a handful of original theories that don't fit neatly anywhere else. All of them are trying to find the thing underneath the thing.
                 </p>
-
-                <div style={{ borderLeft: '2px solid rgba(139,115,85,0.3)', paddingLeft: '1.25rem', marginBottom: '1.4rem' }}>
-                  <p style={{ fontSize: '0.75rem', fontFamily: "'DM Mono', monospace", letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '0.6rem' }}>
-                    A note on how this is made
-                  </p>
-                  <p style={{ fontSize: 'clamp(0.88rem, 2vw, 0.95rem)', color: 'var(--deep-sepia)', lineHeight: 1.8 }}>
-                    The essays are written with Claude — Anthropic's AI — as a genuine collaborator, not a ghostwriter. The ideas, the selection, the framing, and the obsessions are human. The prose is a collaboration.
-                  </p>
-                </div>
               </>
             )}
           </div>

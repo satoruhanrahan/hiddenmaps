@@ -10,9 +10,10 @@ type Props = {
   prev: Article | null
   next: Article | null
   slug: string
+  vaultMode?: boolean
 }
 
-export default function ArticleContent({ article, prev, next, slug }: Props) {
+export default function ArticleContent({ article, prev, next, slug, vaultMode }: Props) {
   const { language } = useLanguage()
   const [Content, setContent] = useState<React.ComponentType | null>(null)
 
@@ -63,11 +64,15 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
               display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '2rem',
               flexWrap: 'wrap',
             }}>
-              <Link href="/" style={{ color: 'var(--sepia)' }}>Hidden Maps</Link>
+              <Link href="/" style={{ color: 'var(--sepia)' }}>The Hidden Owl</Link>
               <span>/</span>
-              <Link href="/articles" style={{ color: 'var(--sepia)' }}>
-                {language === 'ja' ? '記事' : 'Articles'}
-              </Link>
+              {vaultMode ? (
+                <Link href="/vault" style={{ color: 'var(--sepia)' }}>The Vault</Link>
+              ) : (
+                <Link href="/articles" style={{ color: 'var(--sepia)' }}>
+                  {language === 'ja' ? '記事' : 'Articles'}
+                </Link>
+              )}
               <span>/</span>
               <span>{article.num}</span>
             </div>
@@ -107,20 +112,35 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
             <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em',
               textTransform: 'uppercase', color: 'var(--faint)',
-              borderTop: '1px solid rgba(139,115,85,0.2)', paddingTop: '1rem', marginBottom: '0.8rem',
+              borderTop: '1px solid rgba(139,115,85,0.15)', paddingTop: '1rem', marginBottom: '0.8rem',
             }}>
               {language === 'ja' ? '記録番号' : 'Record No.'}
             </div>
             <div style={{ fontFamily: "'Cinzel', serif", fontSize: '2.5rem', fontWeight: 400, color: 'var(--ink)', opacity: 0.15, lineHeight: 1 }}>
               {article.num}
             </div>
-            <div style={{
-              marginTop: '2rem',
-              fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.15em',
-              color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '0.5rem',
-            }}>
-              ◈ {language === 'ja' ? 'AI執筆' : 'AI Authored'}
-            </div>
+            {vaultMode && (
+              <div style={{
+                marginTop: '2rem',
+                fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.15em',
+                color: article.authored === 'human' ? 'var(--rust)' : 'var(--gold)',
+                display: 'flex', alignItems: 'center', gap: '0.5rem',
+              }}>
+                ◈ {article.authored === 'human'
+                  ? (language === 'ja' ? '人間執筆' : 'Human Authored')
+                  : (language === 'ja' ? 'AI執筆' : 'AI Authored')}
+              </div>
+            )}
+            {language === 'ja' && (
+              <div style={{
+                marginTop: '2rem',
+                fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.12em',
+                color: 'var(--faint)', lineHeight: 1.6,
+                borderTop: '1px solid rgba(139,115,85,0.15)', paddingTop: '1rem',
+              }}>
+                ◈ AIを使用して翻訳
+              </div>
+            )}
           </div>
         </div>{/* end article-header-grid */}
       </header>
@@ -154,14 +174,14 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
         display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem',
       }}>
         {prev ? (
-          <Link href={`/articles/${prev.slug}`} style={{ display: 'block' }}>
+          <Link href={vaultMode ? `/vault/${prev.slug}` : `/articles/${prev.slug}`} style={{ display: 'block' }}>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.5rem' }}>
               ← {language === 'ja' ? '前の記事' : 'Previous'}
             </div>
             <div style={{
               fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
               fontSize: language === 'ja' ? '0.95rem' : '1.1rem',
-              color: 'var(--sepia)', lineHeight: 1.3,
+              color: 'var(--deep-sepia)', lineHeight: 1.3,
             }}>
               {prevTitle}
             </div>
@@ -169,14 +189,14 @@ export default function ArticleContent({ article, prev, next, slug }: Props) {
         ) : <div />}
 
         {next ? (
-          <Link href={`/articles/${next.slug}`} style={{ display: 'block', textAlign: 'right' }}>
+          <Link href={vaultMode ? `/vault/${next.slug}` : `/articles/${next.slug}`} style={{ display: 'block', textAlign: 'right' }}>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'var(--faint)', marginBottom: '0.5rem' }}>
               {language === 'ja' ? '次の記事' : 'Next'} →
             </div>
             <div style={{
               fontFamily: language === 'ja' ? "'Noto Serif JP', serif" : "'Cormorant Garamond', serif",
               fontSize: language === 'ja' ? '0.95rem' : '1.1rem',
-              color: 'var(--sepia)', lineHeight: 1.3,
+              color: 'var(--deep-sepia)', lineHeight: 1.3,
             }}>
               {nextTitle}
             </div>

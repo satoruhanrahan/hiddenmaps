@@ -1,15 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { articles as allArticles } from '@/lib/articles'
+import { humanArticles as allArticles } from '@/lib/articles'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const featuredSlugs = [
-  'floodplain-vs-fractured-sea',
-  'gnosticism-and-the-demiurge',
-  'yin-yang-fractal-map',
-  'queen-himiko-yamatai',
-  'harmony-paradox',
+  'why-people-think-so-different-1',
+  'why-people-think-so-different-2',
 ]
 
 const featuredArticles = featuredSlugs

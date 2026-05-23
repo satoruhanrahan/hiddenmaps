@@ -34,7 +34,7 @@ export default function Footer() {
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.12em', color: 'rgba(201,146,42,0.35)', textAlign: 'right', lineHeight: 2 }}>
           35.6762° N, 139.6503° E<br />
           <a
-            href="https://instagram.com/hiddenmaps.app"
+            href="https://www.instagram.com/thehiddenowl_fukurou/"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -48,11 +48,11 @@ export default function Footer() {
             }}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
             </svg>
-            @hiddenmaps.app
+            @thehiddenowl_fukurou
           </a>
         </div>
       </div>

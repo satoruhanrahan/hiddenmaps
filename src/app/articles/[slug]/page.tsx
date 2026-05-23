@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { articles } from '@/lib/articles'
+import { articles, humanArticles } from '@/lib/articles'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
 import ProgressBar from '@/components/ProgressBar'
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-    return articles.map(article => ({ slug: article.slug }))
+    return humanArticles.map(article => ({ slug: article.slug }))
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -18,19 +18,23 @@ export async function generateMetadata({ params }: Props) {
     const article = articles.find(a => a.slug === slug)
     if (!article) return {}
     return {
-        title: `${article.title} — Hidden Maps`,
+        title: article.title,
         description: article.blurb,
+        openGraph: {
+            title: article.title,
+            description: article.blurb,
+        },
     }
 }
 
 export default async function ArticlePage({ params }: Props) {
     const { slug } = await params
-    const article = articles.find(a => a.slug === slug)
+    const article = humanArticles.find(a => a.slug === slug)
     if (!article) notFound()
 
-    const index = articles.findIndex(a => a.slug === slug)
-    const prev = index > 0 ? articles[index - 1] : null
-    const next = index < articles.length - 1 ? articles[index + 1] : null
+    const index = humanArticles.findIndex(a => a.slug === slug)
+    const prev = index > 0 ? humanArticles[index - 1] : null
+    const next = index < humanArticles.length - 1 ? humanArticles[index + 1] : null
 
     return (
         <div style={{ background: 'var(--parchment)', minHeight: '100vh' }}>

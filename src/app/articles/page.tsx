@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
-import { articles, categories, categoryGroups } from '@/lib/articles'
+import { humanArticles as articles, categories, categoryGroups } from '@/lib/articles'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Map nav filter params to category keys
@@ -162,27 +162,6 @@ function ArticlesPageInner() {
             {/* Main */}
             <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: `0 clamp(1.25rem,5vw,3rem) ${activeFilter === 'japan' ? '0' : 'clamp(3rem,8vw,6rem)'}` }}>
 
-                {/* AI Notice — hidden when only Japan is shown */}
-                {activeFilter !== 'japan' && (
-                    <div className="reveal" style={{
-                        marginTop: '3rem', padding: '1.5rem 2rem',
-                        border: '1px solid rgba(139,115,85,0.2)',
-                        borderLeft: '3px solid var(--gold)',
-                        background: 'rgba(255,255,255,0.3)',
-                        display: 'flex', alignItems: 'center', gap: '1.5rem',
-                    }}>
-                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
-                            ◈ AI Authored
-                        </span>
-                        <p style={{ fontSize: '0.92rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.6 }}>
-                            {language === 'ja'
-                                ? <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>これらの記事はClaudeとの共同執筆です。</strong> テーマは本質的に何かを開くアイデアのために選ばれています。</>
-                                : <><strong style={{ fontStyle: 'normal', color: 'var(--ink)', fontWeight: 600 }}>These essays are written with Claude.</strong> Topics are chosen for ideas that genuinely open something up.</>
-                            }
-                        </p>
-                    </div>
-                )}
-
                 {/* Non-Japan category groups */}
                 {visibleGroups.filter(g => g.key !== 'japan').map(group => {
                     const groupArticles = articles.filter(a => a.category === group.key)
@@ -191,11 +170,10 @@ function ArticlesPageInner() {
                     const seriesMap: Record<string, { key: string; label: string; labelJa: string; slugs: string[] }[]> = {
                         culture: [
                             { key: 'geography', label: 'The Geography of Power', labelJa: '権力の地理学', slugs: ['floodplain-vs-fractured-sea', 'geography-of-hierarchy', 'two-shapes-of-hierarchy'] },
+                            { key: 'whypeople', label: 'Why People Think So Different', labelJa: 'なぜ人は違う考え方をするのか', slugs: ['why-people-think-so-different-1', 'why-people-think-so-different-2'] },
                             { key: 'humour', label: 'What Humour Actually Is', labelJa: 'ユーモアとは何か', slugs: ['what-humor-actually-is', 'japan-comedy-restored-order', 'the-wests-many-anxieties', 'banter'] },
                             { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
                             { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
-                            { key: 'future', label: 'Culture Creates the Future', labelJa: '文化が未来を作る', slugs: ['culture-creates-the-future-01-cultural-comparative-advantage', 'culture-creates-the-future-02-automation-sharpens-the-divide', 'culture-creates-the-future-03-two-nations-two-strategies', 'culture-creates-the-future-04-australias-demographic-bet', 'culture-creates-the-future-05-creator-economy-wealth-of-worlds', 'culture-creates-the-future-06-where-creators-go-for-inspiration', 'culture-creates-the-future-07-where-creators-live', 'culture-creates-the-future-08-the-individual-universe'] },
-                            { key: 'wholeandpart', label: 'The Whole and the Part', labelJa: '全体と部分', slugs: ['article-1-the-cosmological-fork', 'article-2-the-language-of-survival', 'article-3-connection-as-assumption', 'article-4-symmetric-insecurities', 'article-5-the-structural-solution'] },
                         ],
                         spirituality: [
                             { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },

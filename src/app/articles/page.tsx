@@ -174,6 +174,7 @@ function ArticlesPageInner() {
                             { key: 'humour', label: 'What Humour Actually Is', labelJa: 'ユーモアとは何か', slugs: ['what-humor-actually-is', 'japan-comedy-restored-order', 'the-wests-many-anxieties', 'banter'] },
                             { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
                             { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
+                            { key: 'greatillusion', label: 'The Great Illusion', labelJa: '大いなる幻想', slugs: ['great-illusion-1-the-fish-dont-know-theyre-wet', 'great-illusion-2-the-water-has-a-shape', 'great-illusion-3-you-went-there-you-didnt-see-it', 'great-illusion-4-there-is-no-single-track', 'great-illusion-5-the-man-in-the-room', 'great-illusion-6-the-loop', 'great-illusion-7-why-nobody-told-you'] },
                         ],
                         spirituality: [
                             { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
@@ -313,6 +314,7 @@ function ArticlesPageInner() {
                 const toBeJapaneseArticles = articles.filter(a => a.category === 'japan' && [
                     'to-be-japanese',
                     'why-the-fusion-runs-so-deep',
+                    'written-in-the-blood',
                     'what-reckoning-actually-costs',
                 ].includes(a.slug))
 

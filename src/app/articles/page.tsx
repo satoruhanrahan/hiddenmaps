@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import NavLight from '@/components/NavLight'
 import Footer from '@/components/Footer'
-import { humanArticles as articles, categories, categoryGroups } from '@/lib/articles'
+import { humanArticles as articles, articles as allArticles, categories, categoryGroups } from '@/lib/articles'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Map nav filter params to category keys
@@ -16,11 +16,13 @@ const filterMap: Record<string, string> = {
     spirituality: 'spirituality',
     theory: 'theory',
     science: 'science',
+    triskelion: 'triskelion',
     all: 'all',
 }
 
 function ArticlesPageInner() {
     const [activeFilter, setActiveFilter] = useState('all')
+    const [selectedBook, setSelectedBook] = useState('kojiki')
     const { language, t } = useLanguage()
     const searchParams = useSearchParams()
 
@@ -52,9 +54,8 @@ function ArticlesPageInner() {
 
     // Display label for filter buttons — renames japan to Fukurou
     function getCatLabel(cat: { key: string; label: string; labelJa?: string }) {
-        if (cat.key === 'japan') {
-            return language === 'ja' ? '不苦労' : 'Fukurou 不苦労'
-        }
+        if (cat.key === 'japan') return language === 'ja' ? 'Fukurou 不苦労' : 'Fukurou 不苦労'
+        if (cat.key === 'triskelion') return 'Triskelion'
         return language === 'ja' ? (cat.labelJa || cat.label) : cat.label
     }
 
@@ -149,8 +150,8 @@ function ArticlesPageInner() {
                         fontSize: '0.58rem', letterSpacing: language === 'ja' ? '0.05em' : '0.15em',
                         textTransform: 'uppercase',
                         color: activeFilter === cat.key ? 'var(--parchment)' : 'var(--sepia)',
-                        background: activeFilter === cat.key ? 'var(--ink)' : 'none',
-                        border: activeFilter === cat.key ? '1px solid var(--ink)' : '1px solid rgba(139,115,85,0.25)',
+                        background: activeFilter === cat.key ? (cat.key === 'triskelion' ? '#1e2820' : 'var(--ink)') : 'none',
+                        border: activeFilter === cat.key ? (cat.key === 'triskelion' ? '1px solid #1e2820' : '1px solid var(--ink)') : '1px solid rgba(139,115,85,0.25)',
                         padding: '0.45rem 1.1rem',
                         cursor: 'pointer', transition: 'all 0.2s',
                     }}>
@@ -160,10 +161,10 @@ function ArticlesPageInner() {
             </div>
 
             {/* Main */}
-            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: `0 clamp(1.25rem,5vw,3rem) ${activeFilter === 'japan' ? '0' : 'clamp(3rem,8vw,6rem)'}` }}>
+            <main style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: `0 clamp(1.25rem,5vw,3rem) ${activeFilter === 'japan' || activeFilter === 'triskelion' ? '0' : 'clamp(3rem,8vw,6rem)'}` }}>
 
                 {/* Non-Japan category groups */}
-                {visibleGroups.filter(g => g.key !== 'japan').map(group => {
+                {activeFilter !== 'triskelion' && visibleGroups.filter(g => g.key !== 'japan').map(group => {
                     const groupArticles = articles.filter(a => a.category === group.key)
 
                     // Define series within each category
@@ -171,10 +172,12 @@ function ArticlesPageInner() {
                         culture: [
                             { key: 'geography', label: 'The Geography of Power', labelJa: '権力の地理学', slugs: ['floodplain-vs-fractured-sea', 'geography-of-hierarchy', 'two-shapes-of-hierarchy'] },
                             { key: 'whypeople', label: 'Why People Think So Different', labelJa: 'なぜ人は違う考え方をするのか', slugs: ['why-people-think-so-different-1', 'why-people-think-so-different-2'] },
+                            { key: 'culturecreates', label: 'Culture Creates the Future', labelJa: '文化が未来を創る', slugs: ['culture-creates-the-future-01-cultural-comparative-advantage', 'culture-creates-the-future-02-automation-sharpens-the-divide', 'culture-creates-the-future-03-two-nations-two-strategies', 'culture-creates-the-future-04-australias-demographic-bet', 'culture-creates-the-future-05-creator-economy-wealth-of-worlds', 'culture-creates-the-future-06-where-creators-go-for-inspiration', 'culture-creates-the-future-07-where-creators-live', 'culture-creates-the-future-08-the-individual-universe'] },
+                            { key: 'wholepart', label: 'The Whole and the Part', labelJa: '全体と部分', slugs: ['article-1-the-cosmological-fork', 'article-2-the-language-of-survival', 'article-3-connection-as-assumption', 'article-4-symmetric-insecurities', 'article-5-the-structural-solution'] },
+                            { key: 'greatillusion', label: 'The Great Illusion', labelJa: '大いなる幻想', slugs: ['great-illusion-1-the-fish-dont-know-theyre-wet', 'great-illusion-2-the-water-has-a-shape', 'great-illusion-3-you-went-there-you-didnt-see-it', 'great-illusion-4-there-is-no-single-track', 'great-illusion-5-the-man-in-the-room', 'great-illusion-6-the-loop', 'great-illusion-7-why-nobody-told-you'] },
                             { key: 'humour', label: 'What Humour Actually Is', labelJa: 'ユーモアとは何か', slugs: ['what-humor-actually-is', 'japan-comedy-restored-order', 'the-wests-many-anxieties', 'banter'] },
                             { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
                             { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
-                            { key: 'greatillusion', label: 'The Great Illusion', labelJa: '大いなる幻想', slugs: ['great-illusion-1-the-fish-dont-know-theyre-wet', 'great-illusion-2-the-water-has-a-shape', 'great-illusion-3-you-went-there-you-didnt-see-it', 'great-illusion-4-there-is-no-single-track', 'great-illusion-5-the-man-in-the-room', 'great-illusion-6-the-loop', 'great-illusion-7-why-nobody-told-you'] },
                         ],
                         spirituality: [
                             { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
@@ -244,7 +247,7 @@ function ArticlesPageInner() {
                     )
                 })}
 
-                {activeFilter !== 'japan' && (
+                {activeFilter !== 'japan' && activeFilter !== 'triskelion' && (
                     <div style={{ textAlign: 'center', padding: '4rem 0 2rem', opacity: 0.12 }}>
                         <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
                             <line x1="0" y1="20" x2="80" y2="20" stroke="#5c4a2a" strokeWidth="0.8" />
@@ -410,8 +413,113 @@ function ArticlesPageInner() {
                 )
             })()}
 
+            {/* Triskelion section — full width deep green */}
+            {(activeFilter === 'all' || activeFilter === 'triskelion') && (() => {
+                const triskelionAccent = '#4a8c5c'
+                const triskelionGold = '#a8c878'
+                const books = [
+                    { key: 'kojiki', book: 'Book I', label: language === 'ja' ? '古事記を読む' : 'Reading the Kojiki', slugs: ['triskelion-01-the-first-kami', 'triskelion-02-the-ownerless-god', 'triskelion-03-the-two-forces', 'triskelion-04-the-tao-and-the-kojiki', 'triskelion-05-the-reed-shoot', 'triskelion-06-the-standing-heaven', 'triskelion-07-the-paired-world', 'triskelion-08-mud-and-sand', 'triskelion-09-the-stake-in-the-ground', 'triskelion-10-the-first-dwelling', 'triskelion-11-the-binding-princess', 'triskelion-12-the-invitation', 'triskelion-13-the-courtship-and-the-correction', 'triskelion-14-the-birth-of-the-islands', 'triskelion-15-the-fire-that-kills', 'triskelion-16-the-descent', 'triskelion-17-the-negotiation-at-the-boulder', 'triskelion-18-the-purification', 'triskelion-19-what-the-myth-might-remember', 'triskelion-20-the-boulder-and-the-peace', 'triskelion-21-the-three-noble-children', 'triskelion-22-the-cave', 'triskelion-23-the-exile-and-what-was-built', 'triskelion-24-the-settlement'] },
+                    { key: 'framework', book: 'Book II', label: language === 'ja' ? '枠組み' : 'The Framework', slugs: [] },
+                    { key: 'japan', book: 'Book III', label: language === 'ja' ? '日本' : 'Japan', slugs: [] },
+                    { key: 'world', book: 'Book IV', label: language === 'ja' ? '世界' : 'The World', slugs: [] },
+                    { key: 'now', book: 'Book V', label: language === 'ja' ? '今' : 'Now', slugs: [] },
+                ]
+
+                const activeBook = books.find(b => b.key === selectedBook)
+                const activeBookArticles = activeBook ? allArticles.filter(a => activeBook.slugs.includes(a.slug) && a.authored === 'human') : []
+
+                return (
+                    <section style={{ background: '#1e2820', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(74,140,92,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(74,140,92,0.06) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, #4a8c5c, #a8c878, #4a8c5c, transparent)', opacity: 0.5 }} />
+                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, #4a8c5c, #a8c878, #4a8c5c, transparent)', opacity: 0.5 }} />
+
+                        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,6vw,5rem) clamp(1.25rem,5vw,3rem)' }}>
+                            <div style={{ borderLeft: '3px solid #4a8c5c', paddingLeft: '1.5rem', marginBottom: '3rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.6rem' }}>
+                                    <span style={{ fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.2em', color: 'rgba(244,240,230,0.9)' }}>
+                                        Triskelion
+                                    </span>
+                                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1rem', color: triskelionGold, opacity: 0.8 }}>
+                                        {language === 'ja' ? '山・海・川の理論' : 'A Theory of Mountain, Sea, and River'}
+                                    </span>
+                                    <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(74,140,92,0.3), transparent)' }} />
+                                </div>
+                                <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'rgba(244,240,230,0.35)', lineHeight: 1.6, maxWidth: 560 }}>
+                                    {language === 'ja'
+                                        ? '古事記、理論の枠組み、日本の歴史、世界のパターン、そして現在の緊張——五冊の書としての持続的な知的作業。'
+                                        : 'A sustained intellectual work in five books — reading the Kojiki, building a framework, tracing Japan, mapping the world, living the tension.'}
+                                </p>
+                            </div>
+
+                            {/* Book selector cards */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
+                                {books.map(book => {
+                                    const hasArticles = book.slugs.length > 0
+                                    const isSelected = selectedBook === book.key
+                                    return (
+                                        <button
+                                            key={book.key}
+                                            onClick={() => hasArticles && setSelectedBook(book.key)}
+                                            style={{
+                                                border: isSelected ? '1px solid #4a8c5c' : '1px solid rgba(74,140,92,0.25)',
+                                                background: isSelected ? 'rgba(74,140,92,0.15)' : 'rgba(255,255,255,0.02)',
+                                                padding: '1.25rem 1rem',
+                                                textAlign: 'left',
+                                                cursor: hasArticles ? 'pointer' : 'default',
+                                                opacity: hasArticles ? 1 : 0.4,
+                                                transition: 'all 0.2s',
+                                                outline: 'none',
+                                            }}>
+                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.5rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: isSelected ? triskelionGold : 'rgba(168,200,120,0.5)', marginBottom: '0.4rem' }}>
+                                                {book.book}
+                                            </div>
+                                            <div style={{ fontFamily: "'Cinzel', serif", fontSize: '0.82rem', letterSpacing: '0.08em', color: isSelected ? 'rgba(244,240,230,0.95)' : 'rgba(244,240,230,0.6)', lineHeight: 1.3, marginBottom: '0.6rem' }}>
+                                                {book.label}
+                                            </div>
+                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.48rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: hasArticles ? triskelionAccent : 'rgba(74,140,92,0.4)' }}>
+                                                {hasArticles
+                                                    ? (language === 'ja' ? book.slugs.length + '記事' : book.slugs.length + ' articles')
+                                                    : (language === 'ja' ? '近日公開' : 'Coming soon')}
+                                            </div>
+                                        </button>
+                                    )
+                                })}
+                            </div>
+
+                            {/* Article list for selected book */}
+                            {activeBookArticles.length > 0 && (
+                                <div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', paddingBottom: '0.8rem', borderBottom: '1px solid rgba(74,140,92,0.25)' }}>
+                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: triskelionGold }}>
+                                            {activeBook?.label}
+                                        </span>
+                                        <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(74,140,92,0.3), transparent)' }} />
+                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', color: 'rgba(244,240,230,0.25)' }}>
+                                            {language === 'ja' ? activeBookArticles.length + '記事' : activeBookArticles.length + ' articles'}
+                                        </span>
+                                    </div>
+                                    {activeBookArticles.map(article => (
+                                        <ArticleRow key={article.slug} article={article} language={language} dark />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )
+            })()}
+
+
             <Footer />
         </div>
+    )
+}
+
+export default function ArticlesPage() {
+    return (
+        <Suspense fallback={<div style={{ background: 'var(--washi)', minHeight: '100vh' }} />}>
+            <ArticlesPageInner />
+        </Suspense>
     )
 }
 
@@ -478,13 +586,5 @@ function ArticleRow({ article, language, dark }: { article: { num: string; title
                 </p>
             </div>
         </Link>
-    )
-}
-
-export default function ArticlesPage() {
-    return (
-        <Suspense fallback={<div style={{ background: 'var(--washi)', minHeight: '100vh' }} />}>
-            <ArticlesPageInner />
-        </Suspense>
     )
 }

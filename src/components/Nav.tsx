@@ -44,6 +44,7 @@ export default function Nav() {
         { label: ja ? '精神・宗教' : 'Spirituality & Religion', href: '/articles?filter=spirituality' },
         { label: ja ? '独自理論' : 'Original Theory', href: '/articles?filter=theory' },
         { label: ja ? '科学・思想' : 'Science & Mind', href: '/articles?filter=science' },
+        { label: 'Triskelion', href: '/articles?filter=triskelion' },
         { label: ja ? 'すべての記事' : 'All Articles', href: '/articles?filter=all' },
     ]
 

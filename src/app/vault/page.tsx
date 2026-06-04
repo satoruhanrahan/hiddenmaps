@@ -252,6 +252,9 @@ function VaultInner() {
             spirituality: [
               { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
             ],
+            science: [
+              { key: 'shortcutmind', label: 'The Shortcut Mind', labelJa: 'ショートカット思考', slugs: ['the-shortcut-mind-01-built-to-survive-not-to-see', 'the-shortcut-mind-02-the-tools-we-built-to-see-anyway', 'the-shortcut-mind-03-what-atrophies', 'the-shortcut-mind-04-the-oldest-advice'] },
+            ],
           }
 
           const seriesList = seriesMap[group.key] || []
@@ -327,6 +330,7 @@ function VaultInner() {
           { key: 'socialmap', label: ja ? '日本の社会地図' : "Japan's Social Map", articles: socialMapArticles, series: true },
           { key: 'truth', label: ja ? '二つの真実の基準' : 'Two Standards of Truth', articles: truthArticles, series: true },
           { key: 'emptiness', label: ja ? '努力の背後にある空虚' : 'The Emptiness Behind the Effort', articles: articles.filter(a => a.category === 'japan' && ['the-emptiness-behind-the-effort-01-the-machine-that-never-stopped', 'the-emptiness-behind-the-effort-02-the-borrowed-purpose', 'the-emptiness-behind-the-effort-03-the-void-and-the-villain', 'the-emptiness-behind-the-effort-04-the-american-trap', 'the-emptiness-behind-the-effort-05-the-wound-nobody-named', 'the-emptiness-behind-the-effort-06-the-universal-machine', 'the-emptiness-behind-the-effort-07-the-machine-can-stop'].includes(a.slug)), series: true },
+          { key: 'justsmile', label: ja ? 'ただ微笑んで手を振れ' : 'Just Smile and Wave', articles: articles.filter(a => a.category === 'japan' && ['just-smile-and-wave-01-the-cost-of-wa', 'just-smile-and-wave-02-everyone-else-looks-angry', 'just-smile-and-wave-03-the-hostile-room', 'just-smile-and-wave-04-when-the-wall-comes-down', 'just-smile-and-wave-05-bamboo-spears-to-waving-in-the-street', 'just-smile-and-wave-06-two-different-alliances', 'just-smile-and-wave-07-the-argument-that-proves-itself'].includes(a.slug)), series: true },
         ]
 
         return (

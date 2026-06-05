@@ -35,7 +35,7 @@ export default function Footer() {
           35.6762° N, 139.6503° E<br />
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
             <a
-              href="https://instagram.com/hiddenmaps.app"
+              href="https://instagram.com/thehiddenowl_fukurou"
               target="_blank"
               rel="noopener noreferrer"
               style={{

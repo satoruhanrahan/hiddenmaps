@@ -33,27 +33,46 @@ export default function Footer() {
 
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.55rem', letterSpacing: '0.12em', color: 'rgba(201,146,42,0.35)', textAlign: 'right', lineHeight: 2 }}>
           35.6762° N, 139.6503° E<br />
-          <a
-            href="https://www.instagram.com/thehiddenowl_fukurou/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: 'rgba(244,240,230,0.6)',
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              marginTop: '0.5rem',
-              padding: '0.45rem 0.9rem',
-              border: '1px solid rgba(244,240,230,0.15)',
-              letterSpacing: '0.15em',
-              transition: 'color 0.2s, border-color 0.2s',
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-            </svg>
-            @thehiddenowl_fukurou
-          </a>
+          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+            <a
+              href="https://instagram.com/hiddenmaps.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'rgba(244,240,230,0.6)',
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.45rem 0.9rem',
+                border: '1px solid rgba(244,240,230,0.15)',
+                letterSpacing: '0.15em',
+                transition: 'color 0.2s, border-color 0.2s',
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+              </svg>
+              @hiddenmaps.app
+            </a>
+            <a
+              href="https://thehiddenowl.substack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'rgba(244,240,230,0.6)',
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.45rem 0.9rem',
+                border: '1px solid rgba(244,240,230,0.15)',
+                letterSpacing: '0.15em',
+                transition: 'color 0.2s, border-color 0.2s',
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+              </svg>
+              Substack
+            </a>
+          </div>
         </div>
       </div>
     </footer>

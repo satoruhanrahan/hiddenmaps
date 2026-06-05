@@ -170,7 +170,7 @@ function ArticlesPageInner() {
                     // Define series within each category
                     const seriesMap: Record<string, { key: string; label: string; labelJa: string; slugs: string[] }[]> = {
                         culture: [
-                            { key: 'geography', label: 'The Geography of Power', labelJa: '権力の地理学', slugs: ['floodplain-vs-fractured-sea', 'geography-of-hierarchy', 'two-shapes-of-hierarchy'] },
+                            { key: 'geography', label: 'The Geography of Power', labelJa: '権力の地理学', slugs: ['floodplain-vs-fragmented-sea', 'geography-of-hierarchy', 'two-shapes-of-hierarchy'] },
                             { key: 'whypeople', label: 'Why People Think So Different', labelJa: 'なぜ人は違う考え方をするのか', slugs: ['why-people-think-so-different-1', 'why-people-think-so-different-2'] },
                             { key: 'culturecreates', label: 'Culture Creates the Future', labelJa: '文化が未来を創る', slugs: ['culture-creates-the-future-01-cultural-comparative-advantage', 'culture-creates-the-future-02-automation-sharpens-the-divide', 'culture-creates-the-future-03-two-nations-two-strategies', 'culture-creates-the-future-04-australias-demographic-bet', 'culture-creates-the-future-05-creator-economy-wealth-of-worlds', 'culture-creates-the-future-06-where-creators-go-for-inspiration', 'culture-creates-the-future-07-where-creators-live', 'culture-creates-the-future-08-the-individual-universe'] },
                             { key: 'wholepart', label: 'The Whole and the Part', labelJa: '全体と部分', slugs: ['article-1-the-cosmological-fork', 'article-2-the-language-of-survival', 'article-3-connection-as-assumption', 'article-4-symmetric-insecurities', 'article-5-the-structural-solution'] },

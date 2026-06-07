@@ -7,6 +7,8 @@ import { useLanguage } from '@/contexts/LanguageContext'
 const featuredSlugs = [
   'why-people-think-so-different-1',
   'why-people-think-so-different-2',
+  'is-christianity-true',
+  'is-christianity-true-2',
 ]
 
 const featuredArticles = featuredSlugs

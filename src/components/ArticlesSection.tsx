@@ -9,6 +9,7 @@ const featuredSlugs = [
   'why-people-think-so-different-2',
   'is-christianity-true',
   'is-christianity-true-2',
+  'why-free-people-make-others-uncomfortable',
 ]
 
 const featuredArticles = featuredSlugs

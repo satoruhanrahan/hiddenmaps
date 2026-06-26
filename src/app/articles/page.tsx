@@ -181,6 +181,7 @@ function ArticlesPageInner() {
                         ],
                         spirituality: [
                             { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
+                            { key: 'freepeople', label: 'Why Free People Make Others Uncomfortable', labelJa: '自由な人がなぜ他者を不快にさせるのか', slugs: ['why-free-people-make-others-uncomfortable'] },
                         ],
                     }
 

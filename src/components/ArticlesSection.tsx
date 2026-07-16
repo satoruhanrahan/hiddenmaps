@@ -6,10 +6,10 @@ import { useLanguage } from '@/contexts/LanguageContext'
 
 const featuredSlugs = [
   'why-people-think-so-different-1',
-  'why-people-think-so-different-2',
   'is-christianity-true',
   'why-free-people-make-others-uncomfortable',
   'did-ancient-china-send-colonists-to-japan',
+  'reading-the-air',
 ]
 
 const featuredArticles = featuredSlugs

@@ -267,7 +267,7 @@ function ArticlesPageInner() {
                 const historyArticles = articles.filter(a => a.category === 'japan' && [
                     'queen-himiko-yamatai',
                     'amaterasu-and-susanoo',
-                    'xu-fu-founded-japan',
+                    'did-ancient-china-send-colonists-to-japan',
                     'edo-japan-happiness',
                 ].includes(a.slug))
 
@@ -329,7 +329,8 @@ function ArticlesPageInner() {
                     { key: 'fukuzawa', label: language === 'ja' ? '福澤諭吉' : 'Fukuzawa Yukichi', articles: fukuzawaArticles, series: true },
                     { key: 'negativity', label: language === 'ja' ? 'ネガティビティとの関係' : "Japan's Relationship with Negativity", articles: negativityArticles, series: true },
                     { key: 'tobejapanese', label: language === 'ja' ? '日本人であること' : 'To Be Japanese', articles: toBeJapaneseArticles, series: true },
-                    { key: 'xufujapan', label: language === 'ja' ? '古代中国は日本に入植者を送ったのか？' : 'Did Ancient China Send Colonists to Japan?', articles: articles.filter(a => a.slug === 'did-ancient-china-send-colonists-to-japan'), series: false },
+                    //{ key: 'xufujapan', label: language === 'ja' ? '古代中国は日本に入植者を送ったのか？' : 'Did Ancient China Send Colonists to Japan?', articles: articles.filter(a => a.slug === 'did-ancient-china-send-colonists-to-japan'), series: false },
+                    //{ key: 'readingtheair', label: language === 'ja' ? '空気を読む：日本の見えない法律システム' : 'Reading the Air: Japan\'s Invisible Legal System', articles: articles.filter(a => a.slug === 'reading-the-air'), series: false },
                     { key: 'socialmap', label: language === 'ja' ? '日本の社会地図' : "Japan's Social Map", articles: socialMapArticles, series: true },
                     { key: 'truth', label: language === 'ja' ? '二つの真実の基準' : 'Two Standards of Truth', articles: truthArticles, series: true },
                 ]

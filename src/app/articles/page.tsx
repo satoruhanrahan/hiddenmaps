@@ -22,7 +22,7 @@ const filterMap: Record<string, string> = {
 
 function ArticlesPageInner() {
     const [activeFilter, setActiveFilter] = useState('all')
-    const [selectedBook, setSelectedBook] = useState('kojiki')
+    const [selectedBook, setSelectedBook] = useState('framework')
     const { language, t } = useLanguage()
     const searchParams = useSearchParams()
 
@@ -150,8 +150,8 @@ function ArticlesPageInner() {
                         fontSize: '0.58rem', letterSpacing: language === 'ja' ? '0.05em' : '0.15em',
                         textTransform: 'uppercase',
                         color: activeFilter === cat.key ? 'var(--parchment)' : 'var(--sepia)',
-                        background: activeFilter === cat.key ? (cat.key === 'triskelion' ? '#1e2820' : 'var(--ink)') : 'none',
-                        border: activeFilter === cat.key ? (cat.key === 'triskelion' ? '1px solid #1e2820' : '1px solid var(--ink)') : '1px solid rgba(139,115,85,0.25)',
+                        background: activeFilter === cat.key ? (cat.key === 'triskelion' ? 'var(--rust)' : 'var(--ink)') : 'none',
+                        border: activeFilter === cat.key ? (cat.key === 'triskelion' ? '1px solid var(--rust)' : '1px solid var(--ink)') : '1px solid rgba(139,115,85,0.25)',
                         padding: '0.45rem 1.1rem',
                         cursor: 'pointer', transition: 'all 0.2s',
                     }}>
@@ -416,42 +416,60 @@ function ArticlesPageInner() {
                 )
             })()}
 
-            {/* Triskelion section — full width deep green */}
+            {/* Triskelion section — full width, light parchment */}
             {(activeFilter === 'all' || activeFilter === 'triskelion') && (() => {
-                const triskelionAccent = '#4a8c5c'
-                const triskelionGold = '#a8c878'
+                const triskelionAccent = 'var(--rust)'
+                const triskelionGold = 'var(--rust)'
                 const books = [
-                    { key: 'kojiki', book: 'Book I', label: language === 'ja' ? '古事記を読む' : 'Reading the Kojiki', slugs: ['triskelion-01-the-first-kami', 'triskelion-02-the-ownerless-god', 'triskelion-03-the-two-forces', 'triskelion-04-the-tao-and-the-kojiki', 'triskelion-05-the-reed-shoot', 'triskelion-06-the-standing-heaven', 'triskelion-07-the-paired-world', 'triskelion-08-mud-and-sand', 'triskelion-09-the-stake-in-the-ground', 'triskelion-10-the-first-dwelling', 'triskelion-11-the-binding-princess', 'triskelion-12-the-invitation', 'triskelion-13-the-courtship-and-the-correction', 'triskelion-14-the-birth-of-the-islands', 'triskelion-15-the-fire-that-kills', 'triskelion-16-the-descent', 'triskelion-17-the-negotiation-at-the-boulder', 'triskelion-18-the-purification', 'triskelion-19-what-the-myth-might-remember', 'triskelion-20-the-boulder-and-the-peace', 'triskelion-21-the-three-noble-children', 'triskelion-22-the-cave', 'triskelion-23-the-exile-and-what-was-built', 'triskelion-24-the-settlement'] },
-                    { key: 'framework', book: 'Book II', label: language === 'ja' ? '枠組み' : 'The Framework', slugs: [] },
-                    { key: 'japan', book: 'Book III', label: language === 'ja' ? '日本' : 'Japan', slugs: [] },
-                    { key: 'world', book: 'Book IV', label: language === 'ja' ? '世界' : 'The World', slugs: [] },
-                    { key: 'now', book: 'Book V', label: language === 'ja' ? '今' : 'Now', slugs: [] },
+                    { key: 'framework', book: 'Book I', label: language === 'ja' ? '枠組み' : 'The Framework', slugs: [] },
+                    { key: 'japan', book: 'Book II', label: language === 'ja' ? '日本' : 'Japan', slugs: [] },
+                    { key: 'world', book: 'Book III', label: language === 'ja' ? '世界' : 'The World', slugs: [] },
+                    { key: 'now', book: 'Book IV', label: language === 'ja' ? '今' : 'Now', slugs: [] },
                 ]
 
                 const activeBook = books.find(b => b.key === selectedBook)
                 const activeBookArticles = activeBook ? allArticles.filter(a => activeBook.slugs.includes(a.slug) && a.authored === 'human') : []
 
                 return (
-                    <section style={{ background: '#1e2820', position: 'relative', overflow: 'hidden' }}>
-                        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(74,140,92,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(74,140,92,0.06) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, #4a8c5c, #a8c878, #4a8c5c, transparent)', opacity: 0.5 }} />
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, transparent, #4a8c5c, #a8c878, #4a8c5c, transparent)', opacity: 0.5 }} />
+                    <section style={{ background: 'var(--aged)', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.2, pointerEvents: 'none', backgroundImage: 'repeating-linear-gradient(88deg, transparent, transparent 3px, rgba(92,74,42,0.05) 3px, rgba(92,74,42,0.05) 4px)' }} />
+                        <img
+                            src="/images/triskelion-parchment.jpg"
+                            alt=""
+                            aria-hidden="true"
+                            style={{
+                                position: 'absolute',
+                                left: '50%',
+                                top: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                minWidth: '100%',
+                                minHeight: '100%',
+                                width: 'auto',
+                                height: 'auto',
+                                opacity: 0.07,
+                                pointerEvents: 'none',
+                                userSelect: 'none',
+                                objectFit: 'cover',
+                            }}
+                        />
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(to right, transparent, rgba(139,115,85,0.3), transparent)' }} />
+                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(to right, transparent, rgba(139,115,85,0.3), transparent)' }} />
 
                         <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,6vw,5rem) clamp(1.25rem,5vw,3rem)' }}>
-                            <div style={{ borderLeft: '3px solid #4a8c5c', paddingLeft: '1.5rem', marginBottom: '3rem' }}>
+                            <div style={{ borderLeft: '3px solid var(--rust)', paddingLeft: '1.5rem', marginBottom: '3rem', background: 'var(--parchment)', paddingTop: '1.5rem', paddingBottom: '1.5rem', paddingRight: '1.5rem', maxWidth: 680 }}>
                                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.6rem' }}>
-                                    <span style={{ fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.2em', color: 'rgba(244,240,230,0.9)' }}>
+                                    <span style={{ fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.2em', color: 'var(--ink)' }}>
                                         Triskelion
                                     </span>
-                                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1rem', color: triskelionGold, opacity: 0.8 }}>
+                                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1rem', color: triskelionGold, opacity: 0.85 }}>
                                         {language === 'ja' ? '山・海・川の理論' : 'A Theory of Mountain, Sea, and River'}
                                     </span>
-                                    <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(74,140,92,0.3), transparent)' }} />
+                                    <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(139,115,85,0.3), transparent)' }} />
                                 </div>
-                                <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'rgba(244,240,230,0.35)', lineHeight: 1.6, maxWidth: 560 }}>
+                                <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--sepia)', lineHeight: 1.6, maxWidth: 560 }}>
                                     {language === 'ja'
-                                        ? '古事記、理論の枠組み、日本の歴史、世界のパターン、そして現在の緊張——五冊の書としての持続的な知的作業。'
-                                        : 'A sustained intellectual work in five books — reading the Kojiki, building a framework, tracing Japan, mapping the world, living the tension.'}
+                                        ? '理論の枠組み、日本の歴史、世界のパターン、そして現在の緊張——四冊の書としての持続的な知的作業。'
+                                        : 'A sustained intellectual work in four books — building a framework, tracing Japan, mapping the world, living the tension.'}
                                 </p>
                             </div>
 
@@ -465,22 +483,22 @@ function ArticlesPageInner() {
                                             key={book.key}
                                             onClick={() => hasArticles && setSelectedBook(book.key)}
                                             style={{
-                                                border: isSelected ? '1px solid #4a8c5c' : '1px solid rgba(74,140,92,0.25)',
-                                                background: isSelected ? 'rgba(74,140,92,0.15)' : 'rgba(255,255,255,0.02)',
+                                                border: isSelected ? '1px solid var(--rust)' : '1px solid rgba(139,115,85,0.25)',
+                                                background: isSelected ? 'rgba(158,61,43,0.07)' : 'var(--parchment)',
                                                 padding: '1.25rem 1rem',
                                                 textAlign: 'left',
                                                 cursor: hasArticles ? 'pointer' : 'default',
-                                                opacity: hasArticles ? 1 : 0.4,
+                                                opacity: hasArticles ? 1 : 0.45,
                                                 transition: 'all 0.2s',
                                                 outline: 'none',
                                             }}>
-                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.5rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: isSelected ? triskelionGold : 'rgba(168,200,120,0.5)', marginBottom: '0.4rem' }}>
+                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.5rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: isSelected ? triskelionGold : 'var(--faint)', marginBottom: '0.4rem' }}>
                                                 {book.book}
                                             </div>
-                                            <div style={{ fontFamily: "'Cinzel', serif", fontSize: '0.82rem', letterSpacing: '0.08em', color: isSelected ? 'rgba(244,240,230,0.95)' : 'rgba(244,240,230,0.6)', lineHeight: 1.3, marginBottom: '0.6rem' }}>
+                                            <div style={{ fontFamily: "'Cinzel', serif", fontSize: '0.82rem', letterSpacing: '0.08em', color: isSelected ? 'var(--ink)' : 'var(--deep-sepia)', lineHeight: 1.3, marginBottom: '0.6rem' }}>
                                                 {book.label}
                                             </div>
-                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.48rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: hasArticles ? triskelionAccent : 'rgba(74,140,92,0.4)' }}>
+                                            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.48rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: hasArticles ? triskelionAccent : 'var(--faint)' }}>
                                                 {hasArticles
                                                     ? (language === 'ja' ? book.slugs.length + '記事' : book.slugs.length + ' articles')
                                                     : (language === 'ja' ? '近日公開' : 'Coming soon')}
@@ -493,17 +511,17 @@ function ArticlesPageInner() {
                             {/* Article list for selected book */}
                             {activeBookArticles.length > 0 && (
                                 <div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', paddingBottom: '0.8rem', borderBottom: '1px solid rgba(74,140,92,0.25)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', paddingBottom: '0.8rem', borderBottom: '1px solid rgba(139,115,85,0.25)' }}>
                                         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: triskelionGold }}>
                                             {activeBook?.label}
                                         </span>
-                                        <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(74,140,92,0.3), transparent)' }} />
-                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', color: 'rgba(244,240,230,0.25)' }}>
+                                        <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(139,115,85,0.3), transparent)' }} />
+                                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.52rem', color: 'var(--faint)' }}>
                                             {language === 'ja' ? activeBookArticles.length + '記事' : activeBookArticles.length + ' articles'}
                                         </span>
                                     </div>
                                     {activeBookArticles.map(article => (
-                                        <ArticleRow key={article.slug} article={article} language={language} dark />
+                                        <ArticleRow key={article.slug} article={article} language={language} />
                                     ))}
                                 </div>
                             )}

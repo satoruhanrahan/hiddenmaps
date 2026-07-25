@@ -5,6 +5,7 @@ import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import ArticlesSection from '@/components/ArticlesSection'
 import ProjectsSection from '@/components/ProjectsSection'
+import TriskelionSection from '@/components/TriskelionSection'
 import AboutSection from '@/components/AboutSection'
 import Footer from '@/components/Footer'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -43,6 +44,7 @@ export default function Home() {
       <ArticlesSection />
       <Divider label={ja ? 'ヒドゥンマップス' : 'Hidden Maps'} />
       <ProjectsSection />
+      <TriskelionSection />
       <Divider label={ja ? '概要' : 'About'} />
       <AboutSection />
       <Footer />

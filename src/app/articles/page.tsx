@@ -421,10 +421,10 @@ function ArticlesPageInner() {
                 const triskelionAccent = 'var(--rust)'
                 const triskelionGold = 'var(--rust)'
                 const books = [
-                    { key: 'framework', book: 'Book I', label: language === 'ja' ? '枠組み' : 'The Framework', slugs: [] },
-                    { key: 'japan', book: 'Book II', label: language === 'ja' ? '日本' : 'Japan', slugs: [] },
-                    { key: 'world', book: 'Book III', label: language === 'ja' ? '世界' : 'The World', slugs: [] },
-                    { key: 'now', book: 'Book IV', label: language === 'ja' ? '今' : 'Now', slugs: [] },
+                    { key: 'framework', book: 'Book I', label: language === 'ja' ? '枠組み' : 'The Framework', slugs: [] as string[] },
+                    { key: 'japan', book: 'Book II', label: language === 'ja' ? '日本' : 'Japan', slugs: [] as string[] },
+                    { key: 'world', book: 'Book III', label: language === 'ja' ? '世界' : 'The World', slugs: [] as string[] },
+                    { key: 'now', book: 'Book IV', label: language === 'ja' ? '今' : 'Now', slugs: [] as string[] },
                 ]
 
                 const activeBook = books.find(b => b.key === selectedBook)

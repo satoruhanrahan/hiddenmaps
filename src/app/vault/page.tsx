@@ -249,6 +249,7 @@ function VaultInner() {
               { key: 'australian', label: 'The Australian Social Script', labelJa: 'オーストラリアの社会的スクリプト', slugs: ['friendliness-mandate', 'why-australia-tests-strangers', 'ghost-of-the-frontier'] },
               { key: 'invisible', label: 'The Invisible Man', labelJa: '見えない男', slugs: ['invisible-man-1-the-present-reality', 'invisible-man-2-what-makes-a-man-attractive', 'invisible-man-3-when-sensitivity-was-strength', 'invisible-man-4-the-making-of-the-hard-man', 'invisible-man-5-the-gold-rush', 'invisible-man-6-different-environments-different-men', 'invisible-man-7-did-beauty-shape-the-face', 'invisible-man-8-the-man-without-a-love-interest', 'invisible-man-9-the-state-decides', 'invisible-man-10-kpop-and-its-limits', 'invisible-man-11-why-he-was-never-in-the-picture'] },
               { key: 'lielov', label: 'The Lie They Called Love', labelJa: '愛と呼ばれた嘘', slugs: ['the-lie-they-called-love-01-the-system-that-needs-you-weak', 'the-lie-they-called-love-02-when-evil-believes-it-is-good', 'the-lie-they-called-love-03-the-good-rebel'] },
+              { key: 'sacredsin', label: 'The Sacred and the Sin', labelJa: '神聖なるものと罪', slugs: ['the-mechanism', 'two-unforgivable-sins', 'a-morning-in-december', 'a-strategy-that-only-works-alone'] },
             ],
             spirituality: [
               { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },

@@ -318,7 +318,7 @@ function VaultInner() {
       {/* Fukurou section — full width dark */}
       {(activeFilter === 'all' || activeFilter === 'japan') && (() => {
         const historyArticles = articles.filter(a => a.category === 'japan' && ['queen-himiko-yamatai', 'amaterasu-and-susanoo', 'xu-fu-founded-japan', 'edo-japan-happiness'].includes(a.slug))
-        const societyArticles = articles.filter(a => a.category === 'japan' && ['harmony-paradox', 'emergency-that-never-ended', 'reading-the-air'].includes(a.slug))
+        const societyArticles = articles.filter(a => a.category === 'japan' && ['harmony-paradox', 'emergency-that-never-ended', 'reading-the-air', 'the-tribe-you-cant-leave'].includes(a.slug))
         const sekigaharaArticles = articles.filter(a => a.category === 'japan' && ['sekigahara-1-the-man-on-the-hill', 'sekigahara-2-the-japan-that-never-was', 'sekigahara-3-the-machinery-of-harmony', 'sekigahara-4-a-different-people', 'sekigahara-5-variables-not-constants'].includes(a.slug))
         const fukuzawaArticles = articles.filter(a => a.category === 'japan' && ['fukuzawa-1-who-he-was', 'fukuzawa-2-the-warning', 'fukuzawa-3-tokugawa-psychology', 'fukuzawa-4-he-saw-it-happening', 'fukuzawa-5-memorialisation'].includes(a.slug))
         const negativityArticles = articles.filter(a => a.category === 'japan' && ['negativity-1-kotodama', 'negativity-2-gambaru', 'negativity-3-smooth-surface', 'negativity-4-the-cost'].includes(a.slug))

@@ -251,6 +251,7 @@ function VaultInner() {
               { key: 'lielov', label: 'The Lie They Called Love', labelJa: '愛と呼ばれた嘘', slugs: ['the-lie-they-called-love-01-the-system-that-needs-you-weak', 'the-lie-they-called-love-02-when-evil-believes-it-is-good', 'the-lie-they-called-love-03-the-good-rebel'] },
               { key: 'sacredsin', label: 'The Sacred and the Sin', labelJa: '神聖なるものと罪', slugs: ['the-mechanism', 'two-unforgivable-sins', 'a-morning-in-december', 'a-strategy-that-only-works-alone'] },
               { key: 'longgame', label: 'The Long Game', labelJa: '長いゲーム', slugs: ['the-long-game'] },
+              { key: 'firealarm', label: 'The Fire Alarm With No Fire', labelJa: '火のない火災報知器', slugs: ['the-fire-alarm-with-no-fire-1-the-alarm', 'the-fire-alarm-with-no-fire-2-no-fire'] },
             ],
             spirituality: [
               { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },

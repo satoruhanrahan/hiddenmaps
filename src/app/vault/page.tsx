@@ -252,6 +252,7 @@ function VaultInner() {
               { key: 'sacredsin', label: 'The Sacred and the Sin', labelJa: '神聖なるものと罪', slugs: ['the-mechanism', 'two-unforgivable-sins', 'a-morning-in-december', 'a-strategy-that-only-works-alone'] },
               { key: 'longgame', label: 'The Long Game', labelJa: '長いゲーム', slugs: ['the-long-game'] },
               { key: 'firealarm', label: 'The Fire Alarm With No Fire', labelJa: '火のない火災報知器', slugs: ['the-fire-alarm-with-no-fire-1-the-alarm', 'the-fire-alarm-with-no-fire-2-no-fire'] },
+              { key: 'whyhonest', label: "Why Can't We Be Honest?", labelJa: 'なぜ正直になれないのか', slugs: ['why-cant-we-be-honest-1-two-kinds-of-sincerity', 'why-cant-we-be-honest-2-living-on-eggshells', 'why-cant-we-be-honest-3-dignity-and-grace'] },
             ],
             spirituality: [
               { key: 'christianity', label: 'Is Christianity True?', labelJa: 'キリスト教は真実か？', slugs: ['is-christianity-true', 'is-christianity-true-2'] },
